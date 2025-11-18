@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Pack Rendimiento | eat&flow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #F5F9F7;
+            color: #2D4A3E;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2D4A3E 0%, #3D5A4E 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header .brand {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+        
+        .intro-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid #E8924C;
+        }
+        
+        .intro-box h2 {
+            color: #E8924C;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .intro-box p {
+            color: #6c757d;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .section h2 {
+            color: #2D4A3E;
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #9ECDB3;
+        }
+        
+        .section h3 {
+            color: #E8924C;
+            font-size: 18px;
+            margin: 25px 0 15px 0;
+        }
+        
+        .field {
+            margin-bottom: 20px;
+        }
+        
+        .field label {
+            display: block;
+            font-weight: 600;
+            color: #2D4A3E;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        
+        .field input,
+        .field textarea,
+        .field select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #E8F3EF;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            background: #F5FAF8;
+            transition: border-color 0.3s;
+        }
+        
+        .field input:focus,
+        .field textarea:focus,
+        .field select:focus {
+            outline: none;
+            border-color: #9ECDB3;
+            background: white;
+        }
+        
+        .field textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .field small {
+            display: block;
+            color: #6c757d;
+            font-size: 13px;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: #F5FAF8;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: normal;
+        }
+        
+        .radio-group label:hover {
+            background: #E8F3EF;
+        }
+        
+        .radio-group input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .submit-section {
+            background: linear-gradient(135deg, #2D4A3E 0%, #3D5A4E 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .submit-section h2 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .submit-section p {
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+        
+        .submit-btn {
+            background: #E8924C;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(232, 146, 76, 0.3);
+            transition: transform 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(232, 146, 76, 0.4);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 26px;
+            }
+            
+            .section {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="brand">eat&flow</div>
+            <h1>📊 Pack Rendimiento</h1>
+            <p>Formulario de Análisis Nutricional</p>
+        </div>
+        
+        <!-- Intro -->
+        <div class="intro-box">
+            <h2>¡Bienvenido/a! 👋</h2>
+            <p><strong>Gracias por confiar en eat&flow.</strong></p>
+            <p>Este formulario me ayuda a entender tu caso específico para darte el mejor análisis posible.</p>
+            <p><strong>Tiempo estimado:</strong> 15-20 minutos</p>
+            <p><strong>Importante:</strong> Sé lo más específico/a posible. Entre más detalles, mejor será tu análisis.</p>
+        </div>
+        
+        <form action="https://formspree.io/f/mzzodpje" method="POST">
+            
+            <!-- Sección 1: Información Básica -->
+            <div class="section">
+                <h2>1. Información Básica</h2>
+                
+                <div class="field">
+                    <label for="nombre">Nombre completo *</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                
+                <div class="field">
+                    <label for="edad">Edad *</label>
+                    <input type="number" id="edad" name="edad" min="15" max="99" required>
+                </div>
+                
+                <div class="field">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="field">
+                    <label for="whatsapp">WhatsApp (con código de país) *</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="+506 1234 5678" required>
+                    <small>Ejemplo: +506 8312 9092</small>
+                </div>
+                
+                <div class="field">
+                    <label for="deportes">¿Qué deporte(s) practicas? *</label>
+                    <input type="text" id="deportes" name="deportes" placeholder="Ej: Ciclismo MTB, Running trail, Triatlón" required>
+                </div>
+                
+                <div class="field">
+                    <label>Nivel deportivo *</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="nivel" value="Recreativo" required>
+                            Recreativo (entreno por salud/diversión)
+                        </label>
+                        <label>
+                            <input type="radio" name="nivel" value="Amateur competitivo">
+                            Amateur competitivo (hago carreras ocasionalmente)
+                        </label>
+                        <label>
+                            <input type="radio" name="nivel" value="Competitivo">
+                            Competitivo (entreno específicamente para competir)
+                        </label>
+                        <label>
+                            <input type="radio" name="nivel" value="Elite">
+                            Elite (competencias nacionales/internacionales)
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección 2: Entrenamiento -->
+            <div class="section">
+                <h2>2. Tu Entrenamiento</h2>
+                
+                <div class="field">
+                    <label for="dias-semana">¿Cuántos días por semana entrenas? *</label>
+                    <select id="dias-semana" name="dias-semana" required>
+                        <option value="">Selecciona...</option>
+                        <option value="1-2">1-2 días</option>
+                        <option value="3-4">3-4 días</option>
+                        <option value="5-6">5-6 días</option>
+                        <option value="7">7 días</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="horario">¿En qué horario entrenas normalmente? *</label>
+                    <select id="horario" name="horario" required>
+                        <option value="">Selecciona...</option>
+                        <option value="Madrugada (4am-7am)">Madrugada (4am-7am)</option>
+                        <option value="Mañana (7am-12pm)">Mañana (7am-12pm)</option>
+                        <option value="Tarde (12pm-6pm)">Tarde (12pm-6pm)</option>
+                        <option value="Noche (6pm-10pm)">Noche (6pm-10pm)</option>
+                        <option value="Variable">Variable (depende del día)</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="duracion">Duración típica de tus entrenamientos *</label>
+                    <select id="duracion" name="duracion" required>
+                        <option value="">Selecciona...</option>
+                        <option value="30min-1h">30 min - 1 hora</option>
+                        <option value="1-2h">1-2 horas</option>
+                        <option value="2-3h">2-3 horas</option>
+                        <option value="3h+">Más de 3 horas</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="evento-proximo">¿Tienes alguna competencia/evento próximo? *</label>
+                    <textarea id="evento-proximo" name="evento-proximo" placeholder="Ej: Carrera 21k el 15 de diciembre, o 'No tengo nada programado aún'" required></textarea>
+                </div>
+                
+                <div class="field">
+                    <label>¿Cuáles son tus objetivos? (puedes seleccionar varios)</label>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="objetivos[]" value="Mejorar rendimiento">
+                            Mejorar rendimiento deportivo
+                        </label>
+                        <label>
+                            <input type="checkbox" name="objetivos[]" value="Perder grasa">
+                            Perder grasa manteniendo músculo
+                        </label>
+                        <label>
+                            <input type="checkbox" name="objetivos[]" value="Ganar músculo">
+                            Ganar músculo/masa
+                        </label>
+                        <label>
+                            <input type="checkbox" name="objetivos[]" value="Más energía">
+                            Tener más energía en entrenamientos
+                        </label>
+                        <label>
+                            <input type="checkbox" name="objetivos[]" value="Mejor recovery">
+                            Mejorar recuperación
+                        </label>
+                        <label>
+                            <input type="checkbox" name="objetivos[]" value="Competencia específica">
+                            Optimizar para competencia específica
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label for="objetivo-adicional">¿Algo más sobre tus objetivos?</label>
+                    <textarea id="objetivo-adicional" name="objetivo-adicional" placeholder="Ej: Quiero mejorar mi tiempo en medias maratones, o necesito más energía en fondos largos"></textarea>
+                </div>
+            </div>
+            
+            <!-- Sección 3: Alimentación Diaria -->
+            <div class="section">
+                <h2>3. Tu Alimentación en un Día Típico de Entrenamiento</h2>
+                <p style="color: #6c757d; margin-bottom: 20px;"><em>Describe un día NORMAL de entrenamiento. Sé específico con cantidades, horarios y alimentos.</em></p>
+                
+                <h3>🌅 Antes del Entreno</h3>
+                
+                <div class="field">
+                    <label for="hora-despertar">¿A qué hora te levantas? *</label>
+                    <input type="time" id="hora-despertar" name="hora-despertar" required>
+                </div>
+                
+                <div class="field">
+                    <label for="pre-entreno">¿Qué comes/tomas antes de entrenar? *</label>
+                    <textarea id="pre-entreno" name="pre-entreno" placeholder="Ej: Una tostada con mantequilla de maní y medio banano, más un café negro. O 'Nada, entreno en ayunas'" required></textarea>
+                    <small>Incluye cantidades aproximadas</small>
+                </div>
+                
+                <div class="field">
+                    <label for="hidratacion-pre">¿Tomas algo antes de entrenar? *</label>
+                    <select id="hidratacion-pre" name="hidratacion-pre" required>
+                        <option value="">Selecciona...</option>
+                        <option value="Solo agua">Solo agua</option>
+                        <option value="Café/té">Café o té</option>
+                        <option value="Bebida deportiva">Bebida deportiva con electrolitos</option>
+                        <option value="Nada">Nada</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                
+                <h3>💪 Durante el Entreno</h3>
+                
+                <div class="field">
+                    <label for="durante-entreno">¿Qué comes/tomas durante el entrenamiento? *</label>
+                    <textarea id="durante-entreno" name="durante-entreno" placeholder="Ej: Si es más de 1h, como un gel cada 30 min y tomo agua. Si es menos de 1h, solo agua." required></textarea>
+                </div>
+                
+                <h3>🍳 Después del Entreno / Desayuno</h3>
+                
+                <div class="field">
+                    <label for="tiempo-post-entreno">¿Cuánto tiempo después de entrenar comes? *</label>
+                    <select id="tiempo-post-entreno" name="tiempo-post-entreno" required>
+                        <option value="">Selecciona...</option>
+                        <option value="Inmediatamente (0-30 min)">Inmediatamente (0-30 min)</option>
+                        <option value="30min-1h">30 min - 1 hora</option>
+                        <option value="1-2h">1-2 horas</option>
+                        <option value="Más de 2h">Más de 2 horas</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="desayuno">¿Qué desayunas después del entreno? *</label>
+                    <textarea id="desayuno" name="desayuno" placeholder="Ej: 3 huevos revueltos con 2 tortillas, medio aguacate, una taza de café con leche. Sé específico con cantidades." required></textarea>
+                </div>
+                
+                <h3>☕ Media Mañana (si aplica)</h3>
+                
+                <div class="field">
+                    <label for="media-manana">¿Comes algo a media mañana?</label>
+                    <textarea id="media-manana" name="media-manana" placeholder="Ej: Un batido de proteína con banano, o 'No como nada'"></textarea>
+                </div>
+                
+                <h3>🍽️ Almuerzo</h3>
+                
+                <div class="field">
+                    <label for="hora-almuerzo">¿A qué hora almuerzas? *</label>
+                    <input type="time" id="hora-almuerzo" name="hora-almuerzo" required>
+                </div>
+                
+                <div class="field">
+                    <label for="almuerzo">¿Qué comes en el almuerzo? *</label>
+                    <textarea id="almuerzo" name="almuerzo" placeholder="Ej: 150g de pollo, 1 taza de arroz, ensalada grande con tomate y pepino, 1 cucharada de aceite de oliva" required></textarea>
+                    <small>Incluye proteína, carbohidratos, grasas, vegetales</small>
+                </div>
+                
+                <h3>🥤 Merienda Tarde</h3>
+                
+                <div class="field">
+                    <label for="merienda-tarde">¿Meriendas algo en la tarde?</label>
+                    <textarea id="merienda-tarde" name="merienda-tarde" placeholder="Ej: Café con 2 galletas de avena, o yogurt con almendras"></textarea>
+                </div>
+                
+                <h3>🌙 Cena</h3>
+                
+                <div class="field">
+                    <label for="hora-cena">¿A qué hora cenas? *</label>
+                    <input type="time" id="hora-cena" name="hora-cena" required>
+                </div>
+                
+                <div class="field">
+                    <label for="cena">¿Qué cenas? *</label>
+                    <textarea id="cena" name="cena" placeholder="Ej: Filete de pescado 120g, puré de camote 1 taza, brócoli al vapor" required></textarea>
+                </div>
+                
+                <h3>🛌 Antes de Dormir</h3>
+                
+                <div class="field">
+                    <label for="antes-dormir">¿Comes/tomas algo antes de dormir?</label>
+                    <textarea id="antes-dormir" name="antes-dormir" placeholder="Ej: Un té de manzanilla, o 'Nada'"></textarea>
+                </div>
+            </div>
+            
+            <!-- Sección 4: Contexto Adicional -->
+            <div class="section">
+                <h2>4. Información Adicional</h2>
+                
+                <div class="field">
+                    <label for="hidratacion-total">¿Cuánta agua tomas al día (aproximado)? *</label>
+                    <select id="hidratacion-total" name="hidratacion-total" required>
+                        <option value="">Selecciona...</option>
+                        <option value="Menos de 1L">Menos de 1 litro</option>
+                        <option value="1-2L">1-2 litros</option>
+                        <option value="2-3L">2-3 litros</option>
+                        <option value="3L+">Más de 3 litros</option>
+                        <option value="No sé">No sé / No mido</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="suplementos">¿Tomas suplementos? (vitaminas, proteína, etc.)</label>
+                    <textarea id="suplementos" name="suplementos" placeholder="Ej: Omega 3, vitamina D, proteína whey post-entreno, o 'No tomo nada'"></textarea>
+                </div>
+                
+                <div class="field">
+                    <label for="problemas-digestivos">¿Tienes problemas digestivos durante o después de entrenar?</label>
+                    <textarea id="problemas-digestivos" name="problemas-digestivos" placeholder="Ej: Me da náusea si como mucho antes, o me cae mal la leche, o 'No, ninguno'"></textarea>
+                </div>
+                
+                <div class="field">
+                    <label for="restricciones">¿Tienes restricciones alimentarias o alergias? *</label>
+                    <textarea id="restricciones" name="restricciones" placeholder="Ej: Vegetariano, intolerancia a lactosa, alérgico a nueces, o 'Ninguna'" required></textarea>
+                </div>
+                
+                <div class="field">
+                    <label for="pregunta-especifica">¿Hay algo específico que quieras que analice o alguna pregunta particular? *</label>
+                    <textarea id="pregunta-especifica" name="pregunta-especifica" placeholder="Ej: ¿Por qué me quedo sin energía en el km 60? ¿Estoy comiendo suficiente proteína? ¿Mi timing está bien?" required></textarea>
+                </div>
+            </div>
+            
+            <!-- Submit -->
+            <div class="submit-section">
+                <h2>¡Listo para tu análisis! 🚀</h2>
+                <p>Revisa que todo esté completo y envía el formulario.</p>
+                <p>Te contactaré por WhatsApp en las próximas horas.</p>
+                <button type="submit" class="submit-btn">Enviar Formulario</button>
+            </div>
+        </form>
+        
+        <div class="footer">
+            <p><strong>eat&flow</strong> | Nutrición Deportiva</p>
+            <p>Isa Herra | @isaherra</p>
+            <p>Si tienes problemas con el formulario, escríbeme directo por WhatsApp</p>
+        </div>
+    </div>
+</body>
+</html>
