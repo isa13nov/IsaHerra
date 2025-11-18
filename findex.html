@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Nutricional Completa - Acompañamiento Mensual | eat&flow</title>
+    <meta name="description" content="Consulta nutricional deportiva con acompañamiento completo. Plan personalizado, seguimiento semanal y ajustes constantes. ₡45,000">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #F5F9F7;
+            color: #2D4A3E;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #2D4A3E 0%, #3D5A4E 100%);
+            color: #FFFFFF;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .logo {
+            width: 200px;
+            height: auto;
+            margin: 0 auto 25px;
+            display: block;
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #FFFFFF;
+            line-height: 1.2;
+        }
+        
+        .hero .subtitle {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #FFFFFF;
+            opacity: 0.95;
+        }
+        
+        .hero .tagline {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #FFFFFF;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: #E8924C;
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(232, 146, 76, 0.3);
+            margin-bottom: 20px;
+        }
+        
+        .price-tag {
+            display: inline-block;
+            background: #FFFFFF;
+            color: #2D4A3E;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 28px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+        
+        .price-detail {
+            font-size: 14px;
+            color: #FFFFFF;
+            opacity: 0.85;
+            margin-top: 8px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        .section {
+            background: #FFFFFF;
+            padding: 30px 20px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2D4A3E;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .problem-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .problem-list li {
+            padding: 12px 12px 12px 40px;
+            margin-bottom: 10px;
+            background: #FFF3EB;
+            border-radius: 8px;
+            position: relative;
+            font-size: 15px;
+        }
+        
+        .problem-list li:before {
+            content: "✗";
+            position: absolute;
+            left: 15px;
+            color: #E8924C;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .solution-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .solution-list li {
+            padding: 12px 12px 12px 40px;
+            margin-bottom: 10px;
+            background: #E8F3EF;
+            border-radius: 8px;
+            position: relative;
+            font-size: 15px;
+        }
+        
+        .solution-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 15px;
+            color: #2D4A3E;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .include-card {
+            background: #F5FAF8;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #9ECDB3;
+        }
+        
+        .include-card h3 {
+            font-size: 18px;
+            color: #2D4A3E;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        .include-card p {
+            font-size: 15px;
+            color: #6c757d;
+            line-height: 1.5;
+        }
+        
+        .icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .perfect-for {
+            background: #FFF8F5;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+            color: #2D4A3E;
+        }
+        
+        .perfect-for:before {
+            content: "🎯 ";
+            font-size: 20px;
+        }
+        
+        .testimonial {
+            background: #E8F3EF;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #2D4A3E;
+            margin: 20px 0;
+        }
+        
+        .testimonial-text {
+            font-size: 16px;
+            font-style: italic;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #2D4A3E;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            color: #2D4A3E;
+            font-size: 15px;
+        }
+        
+        .how-it-works {
+            counter-reset: step-counter;
+        }
+        
+        .step {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 25px;
+        }
+        
+        .step:before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #E8924C;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .step h3 {
+            font-size: 17px;
+            color: #2D4A3E;
+            margin-bottom: 5px;
+        }
+        
+        .step p {
+            font-size: 15px;
+            color: #6c757d;
+        }
+        
+        .faq {
+            margin-bottom: 20px;
+        }
+        
+        .faq-question {
+            font-weight: 700;
+            color: #2D4A3E;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .faq-answer {
+            font-size: 15px;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+        
+        .final-cta {
+            background: linear-gradient(135deg, #2D4A3E 0%, #3D5A4E 100%);
+            color: #FFFFFF;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .final-cta h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #FFFFFF;
+        }
+        
+        .final-cta p {
+            font-size: 16px;
+            margin-bottom: 25px;
+            color: #FFFFFF;
+            opacity: 0.95;
+        }
+        
+        .urgency {
+            background: #E8924C;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .comparison-box {
+            background: #FFFBEA;
+            border: 2px solid #FFD700;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        .comparison-box h3 {
+            color: #2D4A3E;
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .comparison-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(45, 74, 62, 0.1);
+        }
+        
+        .comparison-item:last-child {
+            border-bottom: none;
+        }
+        
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .hero .subtitle {
+                font-size: 24px;
+            }
+            
+            .cta-button {
+                padding: 20px 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <div class="hero">
+        <div style="width: 200px; height: 80px; margin: 0 auto 25px; background: rgba(255,255,255,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; letter-spacing: 2px;">
+            eat&flow
+        </div>
+        
+        <h1>Consulta Nutricional Completa</h1>
+        <p class="subtitle">Acompañamiento mensual personalizado</p>
+        <p class="tagline">Plan completo + seguimiento semanal + ajustes en tiempo real</p>
+        
+        <a href="https://wa.me/50683129092?text=Hola%20Isa!%20Quiero%20info%20de%20la%20Consulta%20Completa" class="cta-button">Quiero acompañamiento →</a>
+        
+        <div class="price-tag">₡45,000/mes</div>
+        <p class="price-detail">Inversión mensual | Cancelas cuando quieras</p>
+    </div>
+
+    <div class="container">
+        <!-- Problema -->
+        <div class="section">
+            <h2 class="section-title">¿Te pasa esto?</h2>
+            <ul class="problem-list">
+                <li>Intentas "hacer dieta" pero no ves cambios</li>
+                <li>No sabes si estás comiendo bien para tu entrenamiento</li>
+                <li>Necesitas ajustes constantes según tu calendario de competencias</li>
+                <li>Quieres alguien que te acompañe y responda tus dudas</li>
+                <li>Probaste planes genéricos pero no funcionan para TU caso</li>
+                <li>Necesitas rendir en entrenamientos Y en tu vida diaria</li>
+            </ul>
+        </div>
+
+        <!-- Solución -->
+        <div class="section">
+            <h2 class="section-title">Lo que realmente necesitas</h2>
+            <ul class="solution-list">
+                <li>Un plan nutricional hecho PARA VOS</li>
+                <li>Ajustes semanales según tu progreso</li>
+                <li>Alguien que responda tus dudas cuando surjan</li>
+                <li>Periodización según tu calendario deportivo</li>
+                <li>Educación nutricional para que aprendas</li>
+                <li>Accountability y seguimiento real</li>
+            </ul>
+        </div>
+
+        <!-- Qué incluye -->
+        <div class="section">
+            <h2 class="section-title">¿Qué incluye?</h2>
+            
+            <div class="include-card">
+                <div class="icon">📋</div>
+                <h3>Consulta Inicial Completa (60 min)</h3>
+                <p>Análisis profundo: historial médico, objetivos deportivos, hábitos actuales, restricciones, estilo de vida completo.</p>
+            </div>
+            
+            <div class="include-card">
+                <div class="icon">🎯</div>
+                <h3>Plan Nutricional Personalizado</h3>
+                <p>Plan completo adaptado a tus horarios de entrenamiento, trabajo, familia. Incluye opciones, cantidades, timing.</p>
+            </div>
+            
+            <div class="include-card">
+                <div class="icon">📱</div>
+                <h3>Seguimiento Semanal por WhatsApp</h3>
+                <p>Check-ins semanales. Me mandas cómo te sentiste, yo te ajusto el plan. Respuestas en menos de 24h.</p>
+            </div>
+            
+            <div class="include-card">
+                <div class="icon">🔄</div>
+                <h3>Ajustes Constantes</h3>
+                <p>¿Cambia tu entrenamiento? ¿Nueva competencia? ¿Viaje? Ajustamos el plan en tiempo real.</p>
+            </div>
+            
+            <div class="include-card">
+                <div class="icon">📞</div>
+                <h3>Llamada Mensual de Seguimiento</h3>
+                <p>30 min cada mes para revisar progreso, resolver dudas complejas, ajustar estrategia.</p>
+            </div>
+            
+            <div class="include-card">
+                <div class="icon">📊</div>
+                <h3>Planes Pre-Competencia</h3>
+                <p>Estrategia nutricional específica para cada carrera/competencia que tengas en el mes.</p>
+            </div>
+            
+            <div class="include-card">
+                <div class="icon">🎓</div>
+                <h3>Educación Nutricional</h3>
+                <p>Te explico el POR QUÉ de cada ajuste. Aprendes para tomar mejores decisiones.</p>
+            </div>
+        </div>
+
+        <!-- Comparación -->
+        <div class="section">
+            <div class="comparison-box">
+                <h3>💡 Consulta Completa vs Pack Rendimiento</h3>
+                
+                <div class="comparison-item">
+                    <strong>Pack Rendimiento (₡15k):</strong><br>
+                    <span style="color: #6c757d; font-size: 14px;">Análisis puntual. Snapshot de 24h. 5 ajustes prioritarios. Ideal para empezar o para atletas que solo necesitan ajustes rápidos.</span>
+                </div>
+                
+                <div class="comparison-item">
+                    <strong>Consulta Completa (₡45k):</strong><br>
+                    <span style="color: #6c757d; font-size: 14px;">Acompañamiento continuo. Plan completo. Seguimiento semanal. Ajustes constantes. Para atletas serios que quieren optimización total.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Para quién es -->
+        <div class="section">
+            <h2 class="section-title">¿Para quién es?</h2>
+            
+            <div class="perfect-for">Atletas con calendario de competencias definido</div>
+            <div class="perfect-for">Personas que entrenan 5+ veces por semana</div>
+            <div class="perfect-for">Deportistas que quieren pasar al siguiente nivel</div>
+            <div class="perfect-for">Atletas que necesitan periodización nutricional</div>
+            <div class="perfect-for">Personas que quieren educación + resultados</div>
+            <div class="perfect-for">Deportistas que valoran el acompañamiento constante</div>
+        </div>
+
+        <!-- Testimonio -->
+        <div class="section">
+            <h2 class="section-title">Resultados reales</h2>
+            <div class="testimonial">
+                <p class="testimonial-text">"Empecé la consulta completa en mayo. En 3 meses bajé mi tiempo de medio maratón de 1:45 a 1:38. Lo mejor no son solo los números, es que ahora SÉ cómo comer para cada tipo de entreno. Isa me enseñó, no solo me dio un plan."</p>
+                <p class="testimonial-author">— Carlos M., Runner | HM 1:38</p>
+            </div>
+        </div>
+
+        <!-- Cómo funciona -->
+        <div class="section">
+            <h2 class="section-title">¿Cómo funciona?</h2>
+            <div class="how-it-works">
+                <div class="step">
+                    <h3>Aplicás y pagas</h3>
+                    <p>Me escribes por WhatsApp. ₡45,000 por SINPE (primer mes). Te mando formulario de intake completo.</p>
+                </div>
+                <div class="step">
+                    <h3>Consulta inicial (60 min)</h3>
+                    <p>Videollamada o presencial. Repasamos TODO: objetivos, historial, estilo de vida, entrenos.</p>
+                </div>
+                <div class="step">
+                    <h3>Recibís tu plan (72h)</h3>
+                    <p>Plan nutricional completo en PDF + documento de educación nutricional.</p>
+                </div>
+                <div class="step">
+                    <h3>Seguimiento semanal</h3>
+                    <p>Check-ins por WhatsApp cada semana. Me contás cómo te sentiste, yo ajusto.</p>
+                </div>
+                <div class="step">
+                    <h3>Llamada mensual</h3>
+                    <p>30 min cada mes para revisar progreso y ajustar estrategia general.</p>
+                </div>
+                <div class="step">
+                    <h3>Renovación mes a mes</h3>
+                    <p>Cada mes decides si continúas. Sin contratos. Sin permanencia mínima.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            
+            <div class="faq">
+                <p class="faq-question">¿Hay permanencia mínima?</p>
+                <p class="faq-answer">No. Se paga mes a mes. Si sentís que no es para vos, cancelas cuando quieras. Sin penalidades.</p>
+            </div>
+            
+            <div class="faq">
+                <p class="faq-question">¿Qué pasa si tengo dudas entre semanas?</p>
+                <p class="faq-answer">Me escribes por WhatsApp. Respondo en menos de 24h. Las dudas rápidas las resuelvo al instante.</p>
+            </div>
+            
+            <div class="faq">
+                <p class="faq-question">¿Incluye plan de comidas día por día?</p>
+                <p class="faq-answer">Sí, el plan incluye estructura diaria con opciones flexibles. No es menú cerrado, es estrategia adaptable a tu vida real.</p>
+            </div>
+            
+            <div class="faq">
+                <p class="faq-question">¿Sirve para pérdida de peso?</p>
+                <p class="faq-answer">Sí, pero el enfoque es RENDIMIENTO primero. Si necesitas perder peso para tu deporte, lo hacemos de forma que no pierdas potencia/velocidad.</p>
+            </div>
+            
+            <div class="faq">
+                <p class="faq-question">¿Cuántos atletas acompañas al mismo tiempo?</p>
+                <p class="faq-answer">Máximo 8 consultas completas activas. Por eso hay lista de espera. Cada persona requiere atención real.</p>
+            </div>
+            
+            <div class="faq">
+                <p class="faq-question">¿Cuándo empiezo?</p>
+                <p class="faq-answer">Si hay cupo disponible, hacemos la consulta inicial en menos de 1 semana. Plan listo en 72h post-consulta.</p>
+            </div>
+        </div>
+
+        <!-- CTA Final -->
+        <div class="final-cta">
+            <div class="urgency">⚡ Solo 2 cupos disponibles en diciembre</div>
+            
+            <h2>¿Listo para optimizar tu nutrición deportiva al máximo?</h2>
+            <p>Acompañamiento mensual personalizado | ₡45,000/mes</p>
+            
+            <a href="https://wa.me/50683129092?text=Hola%20Isa!%20Quiero%20aplicar%20a%20la%20Consulta%20Completa" class="cta-button">Aplicar a Consulta Completa</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>eat&flow</strong> | Nutrición Deportiva</p>
+        <p>Isa Herra | Atleta & Especialista en Rendimiento</p>
+        <p>📍 Costa Rica | 📱 @isaherra</p>
+    </div>
+</body>
+</html>
