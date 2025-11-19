@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pack Rendimiento Rafael Castillo - Análisis Nutricional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #F5F9F7 0%, #E8F3EF 100%);
+            color: #2D4A3E;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(45, 74, 62, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2D4A3E 0%, #3D5A4E 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            border-bottom: 4px solid #9ECDB3;
+        }
+        
+        .logo-space {
+            width: 300px;
+            height: 120px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.95;
+            margin-top: 5px;
+        }
+        
+        .tabs {
+            display: flex;
+            overflow-x: auto;
+            background: white;
+            border-bottom: 2px solid #E8F3EF;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(45, 74, 62, 0.05);
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            font-weight: 600;
+            color: #6c757d;
+            white-space: nowrap;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .tab:hover {
+            background: #F5F9F7;
+            color: #2D4A3E;
+        }
+        
+        .tab.active {
+            color: #2D4A3E;
+            border-bottom: 3px solid #2D4A3E;
+            background: #F5F9F7;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            font-size: 28px;
+            color: #2D4A3E;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #9ECDB3;
+        }
+        
+        .subsection-title {
+            font-size: 22px;
+            color: #2D4A3E;
+            margin: 30px 0 20px;
+            font-weight: 700;
+        }
+        
+        .card {
+            background: #F5FAF8;
+            border-left: 4px solid #9ECDB3;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        
+        .card h3 {
+            color: #2D4A3E;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .card p {
+            margin-bottom: 10px;
+        }
+        
+        .card.highlight {
+            background: linear-gradient(135deg, #FFF8F5 0%, #FFF3EB 100%);
+            border-left: 4px solid #E8924C;
+        }
+        
+        .card.success {
+            background: #D4EDDA;
+            border-left: 4px solid #28a745;
+        }
+        
+        .card.warning {
+            background: #FFF3CD;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .card.critical {
+            background: #F8D7DA;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #E8F3EF 0%, #D4EDDA 100%);
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .warning-box {
+            background: #FFF3CD;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .critical-box {
+            background: #F8D7DA;
+            border-left: 4px solid #dc3545;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #E8924C;
+            margin: 10px 0;
+        }
+        
+        .metric-label {
+            font-size: 14px;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin: 5px 5px 5px 0;
+        }
+        
+        .badge-success {
+            background: #D4EDDA;
+            color: #155724;
+        }
+        
+        .badge-warning {
+            background: #FFF3CD;
+            color: #856404;
+        }
+        
+        .badge-critical {
+            background: #F8D7DA;
+            color: #721c24;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin-top: 20px;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #9ECDB3;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #E8924C;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #9ECDB3;
+        }
+        
+        .timeline-item h4 {
+            color: #2D4A3E;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table th {
+            background: #2D4A3E;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #E8F3EF;
+        }
+        
+        ul {
+            margin: 15px 0 15px 25px;
+        }
+        
+        ul li {
+            margin-bottom: 10px;
+        }
+        
+        strong {
+            color: #2D4A3E;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-space">
+                eat&flow
+            </div>
+            <h1>Pack Rendimiento - Análisis Nutricional</h1>
+            <p>Cliente: Rafael Castillo Valverde | Edad: 33 años | Nivel: Competitivo</p>
+            <p>Deporte: Ciclismo MTB | Fecha: 18 de noviembre, 2025</p>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="showSection('resumen')">📋 Resumen</button>
+            <button class="tab" onclick="showSection('analisis')">🔍 Análisis</button>
+            <button class="tab" onclick="showSection('ajustes')">🎯 5 Ajustes</button>
+            <button class="tab" onclick="showSection('plan-comp')">🚴 Plan Competencia</button>
+            <button class="tab" onclick="showSection('implementacion')">📊 Implementación</button>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <!-- RESUMEN EJECUTIVO -->
+            <div id="resumen" class="section active">
+                <h2 class="section-title">Resumen Ejecutivo</h2>
+                
+                <div class="critical-box">
+                    <h3 style="color: #721c24; margin-bottom: 15px;">🚨 Diagnóstico Principal</h3>
+                    <p><strong>Rafael, tu estrategia actual está SABOTEANDO tu rendimiento.</strong></p>
+                    <p style="margin-top: 10px;">Estás evitando carbohidratos (tu combustible principal) mientras intentas mejorar rendimiento, perder grasa Y ganar músculo simultáneamente. Esto es fisiológicamente contraproducente y explica por qué no estás viendo los resultados que buscas.</p>
+                </div>
+                
+                <h3 class="subsection-title">⚠️ Errores Críticos Identificados</h3>
+                
+                <div class="card critical">
+                    <p><strong>Error Crítico #1:</strong> Evitar carbohidratos durante el entrenamiento. Los carbohidratos son el combustible primario para esfuerzos de intensidad media-alta (como MTB). Sin ellos, tu cuerpo quema músculo como combustible.</p>
+                    <span class="badge badge-critical">IMPACTO DIRECTO EN RENDIMIENTO</span>
+                </div>
+                
+                <div class="card critical">
+                    <p><strong>Error Crítico #2:</strong> Entrenar en ayunas prolongado (8+ horas) sin reservas de glucógeno. Esto limita severamente tu intensidad de entrenamiento y promueve catabolismo muscular.</p>
+                    <span class="badge badge-critical">PÉRDIDA DE MÚSCULO</span>
+                </div>
+                
+                <div class="card warning">
+                    <p><strong>Error #3:</strong> Objetivos contradictorios sin periodización. Quieres ganar músculo + perder grasa + mejorar rendimiento al mismo tiempo, pero tu alimentación no está periodizada para ninguno de estos objetivos.</p>
+                    <span class="badge badge-warning">FALTA DE ENFOQUE</span>
+                </div>
+                
+                <h3 class="subsection-title">✅ Fortalezas Identificadas</h3>
+                
+                <div class="card success">
+                    <p><strong>Fortaleza #1:</strong> Alta ingesta de proteína (4 huevos + proteína en cada comida). Esto es excelente para mantener músculo.</p>
+                </div>
+                
+                <div class="card success">
+                    <p><strong>Fortaleza #2:</strong> Comes dentro de 30min-1h post-entreno, que es la ventana óptima de recuperación.</p>
+                </div>
+                
+                <div class="card success">
+                    <p><strong>Fortaleza #3:</strong> Buena hidratación (2-3L/día) y suplementación básica adecuada.</p>
+                </div>
+                
+                <div class="info-box">
+                    <strong>🔑 La Verdad Incómoda:</strong> No puedes mejorar rendimiento deportivo evitando carbohidratos. Los carbohidratos NO son el enemigo. El exceso calórico y la falta de periodización SÍ lo son. Necesitamos cambiar tu mentalidad sobre los carbohidratos para desbloquear tu rendimiento.
+                </div>
+            </div>
+            
+            <!-- ANÁLISIS DETALLADO -->
+            <div id="analisis" class="section">
+                <h2 class="section-title">Análisis Detallado de tu Alimentación</h2>
+                
+                <h3 class="subsection-title">1. Pre-Entreno: Café en Ayunas</h3>
+                
+                <div class="card critical">
+                    <h3>Situación Actual</h3>
+                    <p>Te levantas 5:30am, tomas café, y entrenas en ayunas después de 10+ horas sin comer.</p>
+                    
+                    <h3>Análisis Fisiológico</h3>
+                    <p><strong>Lo que está pasando en tu cuerpo:</strong></p>
+                    <ul>
+                        <li>Después de 10h de ayuno, tus reservas de glucógeno hepático están AGOTADAS (el hígado solo almacena ~100g de glucógeno que se consume durante la noche)</li>
+                        <li>Tus reservas musculares de glucógeno están al 60-70% de capacidad</li>
+                        <li>Tu cuerpo NO tiene combustible rápido disponible para esfuerzos de intensidad media-alta</li>
+                        <li>Resultado: Tu intensidad de entrenamiento está limitada a ~60-70% de tu potencial real</li>
+                    </ul>
+                    
+                    <h3>Impacto en Rendimiento</h3>
+                    <p><strong>⚠️ Estás limitando artificialmente tu capacidad de entrenamiento.</strong> No puedes hacer intervalos de alta intensidad, no puedes mantener esfuerzos sostenidos arriba de umbral, y no puedes entrenar a la intensidad necesaria para mejorar tu FTP o potencia.</p>
+                    
+                    <h3>Consecuencia</h3>
+                    <p>Estás entrenando a <strong>baja intensidad</strong> pensando que es "alta intensidad". Tu cuerpo no recibe el estímulo suficiente para adaptarse y mejorar.</p>
+                </div>
+                
+                <h3 class="subsection-title">2. Durante Entreno: Agua + Sales (Sin Carbos)</h3>
+                
+                <div class="card critical">
+                    <h3>Situación Actual</h3>
+                    <p>"Trato de evitar los carbos y entreno con agua y sales o batido de remolacha"</p>
+                    
+                    <h3>Análisis de Sustrato Energético</h3>
+                    <p><strong>Ciencia del metabolismo:</strong></p>
+                    <ul>
+                        <li><strong>Intensidad 50-60% FTP:</strong> 50% grasa, 50% carbohidratos</li>
+                        <li><strong>Intensidad 70-80% FTP:</strong> 30% grasa, 70% carbohidratos</li>
+                        <li><strong>Intensidad 85%+ FTP:</strong> 10% grasa, 90% carbohidratos</li>
+                        <li><strong>Intervalos / Sprints:</strong> 100% carbohidratos (anaeróbico)</li>
+                    </ul>
+                    
+                    <p style="margin-top: 15px;"><strong>Sin carbohidratos disponibles durante el entreno:</strong></p>
+                    <ul>
+                        <li>Tu cuerpo SOLO puede trabajar a intensidad de quema de grasa (50-60% FTP máximo)</li>
+                        <li>Cualquier esfuerzo arriba de ese umbral te obliga a quemar proteína muscular como combustible (gluconeogénesis)</li>
+                        <li>No puedes hacer trabajo de calidad (intervalos, subidas fuertes, sprints)</li>
+                    </ul>
+                    
+                    <h3>El Mito de "Entrenar en Ayunas Quema Más Grasa"</h3>
+                    <p><strong>Realidad:</strong> Entrenar en ayunas quema más grasa DURANTE el entreno, pero:</p>
+                    <ul>
+                        <li>Reduce tu intensidad de entrenamiento en 20-30%</li>
+                        <li>Limita tu capacidad de hacer trabajo de calidad</li>
+                        <li>Reduce tu gasto calórico TOTAL (porque entrenas más suave)</li>
+                        <li>Promueve pérdida de músculo (catabolismo)</li>
+                        <li>Resulta en MENOS pérdida de grasa neta en las 24h siguientes</li>
+                    </ul>
+                    
+                    <p style="margin-top: 15px;"><strong>🔥 Para MTB competitivo, necesitas entrenar FUERTE, no entrenar en ayunas.</strong></p>
+                </div>
+                
+                <h3 class="subsection-title">3. Post-Entreno: 4 Huevos + Aguacate + Queso</h3>
+                
+                <div class="card warning">
+                    <h3>Situación Actual</h3>
+                    <p>Comes dentro de 30min-1h post-entreno: 4 huevos, aguacate, queso, café.</p>
+                    
+                    <h3>Análisis</h3>
+                    <p><strong>Lo bueno:</strong></p>
+                    <ul>
+                        <li>✅ Timing excelente (ventana anabólica)</li>
+                        <li>✅ Alta proteína (~28g de los huevos + queso)</li>
+                        <li>✅ Grasas saludables del aguacate</li>
+                    </ul>
+                    
+                    <p><strong>Lo malo:</strong></p>
+                    <ul>
+                        <li>❌ CERO carbohidratos para reponer glucógeno</li>
+                        <li>❌ No estás aprovechando la ventana de recuperación para recargar energía</li>
+                        <li>❌ Tu próximo entreno empezará con reservas de glucógeno bajas</li>
+                    </ul>
+                    
+                    <h3>Consecuencia</h3>
+                    <p>Estás recuperando proteína muscular, pero NO estás recuperando energía. Cada entreno empiezas con menos "gasolina en el tanque".</p>
+                </div>
+                
+                <h3 class="subsection-title">4. Resto del Día: Bajo en Carbohidratos</h3>
+                
+                <div class="card warning">
+                    <h3>Situación Actual</h3>
+                    <ul>
+                        <li>Almuerzo: Proteína + ensalada (sin mención de carbos)</li>
+                        <li>Merienda: Proteína + avena + coco</li>
+                        <li>Cena: Proteína + ensalada (sin carbos)</li>
+                    </ul>
+                    
+                    <h3>Estimación de Ingesta de Carbohidratos</h3>
+                    <p><strong>Carbohidratos totales al día: ~80-100g</strong></p>
+                    <ul>
+                        <li>Avena en merienda: ~30-40g</li>
+                        <li>Vegetales: ~30-40g</li>
+                        <li>Coco, etc: ~10-20g</li>
+                    </ul>
+                    
+                    <h3>Requerimiento Real para un Ciclista Competitivo</h3>
+                    <p><strong>Necesitas: 4-6g de carbohidratos por kg de peso corporal</strong></p>
+                    <p>Asumiendo que pesas ~70kg: <strong>280-420g de carbohidratos/día</strong></p>
+                    
+                    <p style="margin-top: 15px;"><strong>🚨 Estás consumiendo 25-35% de los carbohidratos que necesitas.</strong></p>
+                    
+                    <h3>Impacto</h3>
+                    <ul>
+                        <li>Fatiga crónica</li>
+                        <li>Recuperación lenta entre entrenamientos</li>
+                        <li>Imposibilidad de hacer entrenamientos de alta intensidad</li>
+                        <li>Pérdida gradual de masa muscular</li>
+                        <li>Sistema inmune comprometido</li>
+                        <li>Estancamiento en rendimiento</li>
+                    </ul>
+                </div>
+                
+                <h3 class="subsection-title">5. Objetivos Contradictorios</h3>
+                
+                <div class="card">
+                    <h3>Tu Lista de Objetivos</h3>
+                    <ul>
+                        <li>✓ Mejorar rendimiento</li>
+                        <li>✓ Perder grasa</li>
+                        <li>✓ Ganar músculo</li>
+                        <li>✓ Más energía</li>
+                        <li>✓ Mejor recovery</li>
+                        <li>✓ Competencia específica</li>
+                    </ul>
+                    
+                    <h3>La Realidad Fisiológica</h3>
+                    <p><strong>No puedes hacer TODO al mismo tiempo.</strong></p>
+                    
+                    <p style="margin-top: 15px;"><strong>Opción A: Priorizar Rendimiento</strong></p>
+                    <ul>
+                        <li>Superávit calórico leve (+200-300 kcal/día)</li>
+                        <li>Alto en carbohidratos (5-6g/kg)</li>
+                        <li>Alta proteína (2g/kg)</li>
+                        <li>Resultado: Mejoras FTP, potencia, resistencia | Posible ganancia muscular leve | NO pérdida de grasa</li>
+                    </ul>
+                    
+                    <p style="margin-top: 15px;"><strong>Opción B: Priorizar Composición Corporal</strong></p>
+                    <ul>
+                        <li>Déficit calórico moderado (-300-500 kcal/día)</li>
+                        <li>Carbohidratos periodizados (altos días de entreno, bajos días de descanso)</li>
+                        <li>Muy alta proteína (2.2-2.5g/kg)</li>
+                        <li>Resultado: Pérdida de grasa | Mantenimiento de músculo | Mantenimiento o leve mejora en rendimiento</li>
+                    </ul>
+                    
+                    <p style="margin-top: 15px;"><strong>🎯 Tenemos que elegir UNA prioridad para enero-marzo, luego pivoteamos.</strong></p>
+                </div>
+            </div>
+            
+            <!-- 5 AJUSTES PRIORITARIOS -->
+            <div id="ajustes" class="section">
+                <h2 class="section-title">🎯 Los 5 Ajustes Prioritarios</h2>
+                
+                <div class="card highlight">
+                    <h3>📍 Cómo Usar Esta Sección</h3>
+                    <p>Estos 5 ajustes están priorizados por impacto. Implementa uno por semana en orden. No intentes cambiar todo de golpe.</p>
+                </div>
+                
+                <!-- AJUSTE 1 -->
+                <div class="card critical">
+                    <h2 style="color: #721c24; margin-bottom: 15px;">🔥 AJUSTE #1: Carbohidratos Durante Entreno</h2>
+                    <span class="badge badge-critical">MÁXIMA PRIORIDAD</span>
+                    <span class="badge" style="background: #E8924C; color: white;">IMPLEMENTAR SEMANA 1</span>
+                    
+                    <h3 style="margin-top: 20px;">Qué Cambiar</h3>
+                    <p><strong>Actual:</strong> Agua + sales (o batido remolacha) durante entreno</p>
+                    <p><strong>Nuevo:</strong> 40-60g de carbohidratos por hora de entreno</p>
+                    
+                    <h3 style="margin-top: 20px;">Opciones Específicas (elige una)</h3>
+                    
+                    <p><strong>Opción A - Geles deportivos:</strong></p>
+                    <ul>
+                        <li>1 gel cada 30-40 min de entreno (cada gel = ~25g carbos)</li>
+                        <li>Marcas: GU Energy, PowerBar, SIS, Maurten</li>
+                        <li>Más agua para acompañar</li>
+                    </ul>
+                    
+                    <p><strong>Opción B - Bebida deportiva casera:</strong></p>
+                    <ul>
+                        <li>750ml agua + 45g maltodextrina + pizca de sal</li>
+                        <li>Consumir durante la hora de entreno</li>
+                        <li>Costo: ~₡200/entreno</li>
+                    </ul>
+                    
+                    <p><strong>Opción C - Alimentos reales (entrenamientos base):</strong></p>
+                    <ul>
+                        <li>1 banano cada 45min</li>
+                        <li>o 4-5 dátiles cada hora</li>
+                        <li>o 2 barritas de cereales por hora</li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 20px;">Protocolo de Implementación</h3>
+                    <p><strong>Semana 1:</strong> Solo en entrenamientos >1h. Empieza con 30g/hora.</p>
+                    <p><strong>Semana 2:</strong> Sube a 40g/hora. Nota cómo cambia tu energía.</p>
+                    <p><strong>Semana 3+:</strong> Consolida en 50-60g/hora. Este es tu estándar.</p>
+                    
+                    <h3 style="margin-top: 20px;">Qué Esperar</h3>
+                    <ul>
+                        <li><strong>Días 1-3:</strong> Puede sentirse "raro" tener energía extra. Tu estómago se adapta.</li>
+                        <li><strong>Semana 1:</strong> Notarás que puedes mantener intensidad más tiempo.</li>
+                        <li><strong>Semana 2-3:</strong> Tu FTP promedio en entrenamientos sube 10-15 watts.</li>
+                        <li><strong>Semana 4:</strong> Recuperación más rápida entre entrenamientos.</li>
+                    </ul>
+                    
+                    <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                        <strong>💰 Presupuesto:</strong>
+                        <p>Geles: ₡1,500-2,000/semana (entrenando 5-6x)</p>
+                        <p>Maltodextrina: ₡800-1,200/semana</p>
+                        <p>Bananos: ₡500-800/semana</p>
+                    </div>
+                </div>
+                
+                <!-- AJUSTE 2 -->
+                <div class="card critical">
+                    <h2 style="color: #721c24; margin-bottom: 15px;">⚡ AJUSTE #2: Pre-Entreno Estratégico</h2>
+                    <span class="badge badge-critical">CRÍTICO</span>
+                    <span class="badge" style="background: #E8924C; color: white;">IMPLEMENTAR SEMANA 2</span>
+                    
+                    <h3 style="margin-top: 20px;">Qué Cambiar</h3>
+                    <p><strong>Actual:</strong> Café solo → Entrenar en ayunas</p>
+                    <p><strong>Nuevo:</strong> Café + carbohidratos de digestión rápida 20-30 min antes de entrenar</p>
+                    
+                    <h3 style="margin-top: 20px;">Opciones Específicas</h3>
+                    
+                    <p><strong>Opción A - Rápida (5min prep):</strong></p>
+                    <ul>
+                        <li>1 banano maduro + 1 cucharada de miel</li>
+                        <li>Café como siempre</li>
+                        <li>Carbohidratos: ~35g | Fácil digestión</li>
+                    </ul>
+                    
+                    <p><strong>Opción B - Líquida (mejor para estómagos sensibles):</strong></p>
+                    <ul>
+                        <li>Smoothie: 1 banano + 200ml leche/bebida vegetal + 1 cucharada miel + hielo</li>
+                        <li>Café después</li>
+                        <li>Carbohidratos: ~45g | Digestión rápida</li>
+                    </ul>
+                    
+                    <p><strong>Opción C - Sólida (entrenamientos más largos >2h):</strong></p>
+                    <ul>
+                        <li>2 tostadas con mermelada + 1 banano</li>
+                        <li>Café</li>
+                        <li>Carbohidratos: ~60g | Comer 45min antes de salir</li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 20px;">Timing Crítico</h3>
+                    <table>
+                        <tr>
+                            <th>Tipo de Entreno</th>
+                            <th>Comer Antes</th>
+                            <th>Cantidad Carbos</th>
+                        </tr>
+                        <tr>
+                            <td>Intervalos / Alta Intensidad</td>
+                            <td>45-60 min antes</td>
+                            <td>50-60g</td>
+                        </tr>
+                        <tr>
+                            <td>Entreno Base / Resistencia</td>
+                            <td>20-30 min antes</td>
+                            <td>30-40g</td>
+                        </tr>
+                        <tr>
+                            <td>Recovery / Suave</td>
+                            <td>15-20 min antes</td>
+                            <td>20-30g</td>
+                        </tr>
+                    </table>
+                    
+                    <h3 style="margin-top: 20px;">Qué Esperar</h3>
+                    <ul>
+                        <li><strong>Primera semana:</strong> Sentirás "algo en el estómago". Es normal, tu cuerpo se adapta.</li>
+                        <li><strong>Segunda semana:</strong> Notarás explosividad en los primeros 20-30 min de entreno.</li>
+                        <li><strong>Tercera semana:</strong> Puedes hacer intervalos REALES. Tu potencia en esfuerzos cortos sube 15-20%.</li>
+                    </ul>
+                    
+                    <div style="background: #D4EDDA; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                        <strong>✅ Beneficio Extra:</strong> Al tener energía disponible desde el minuto 1, puedes hacer calentamiento de calidad. Esto reduce riesgo de lesión y mejora la calidad del entreno completo.
+                    </div>
+                </div>
+                
+                <!-- AJUSTE 3 -->
+                <div class="card warning">
+                    <h2 style="color: #856404; margin-bottom: 15px;">🍳 AJUSTE #3: Post-Entreno con Carbohidratos</h2>
+                    <span class="badge badge-warning">ALTA PRIORIDAD</span>
+                    <span class="badge" style="background: #E8924C; color: white;">IMPLEMENTAR SEMANA 2</span>
+                    
+                    <h3 style="margin-top: 20px;">Qué Cambiar</h3>
+                    <p><strong>Actual:</strong> 4 huevos + aguacate + queso (solo proteína y grasa)</p>
+                    <p><strong>Nuevo:</strong> 4 huevos + aguacate + queso + CARBOHIDRATOS</p>
+                    
+                    <h3 style="margin-top: 20px;">Ratio Ideal Post-Entreno</h3>
+                    <p><strong>3:1 Carbohidratos:Proteína</strong></p>
+                    <p>Para tu desayuno actual (~28g proteína), necesitas ~80-90g carbohidratos</p>
+                    
+                    <h3 style="margin-top: 20px;">Opciones de Carbohidratos (agrega UNA)</h3>
+                    
+                    <p><strong>Opción A - Tortillas:</strong></p>
+                    <ul>
+                        <li>3-4 tortillas de maíz con tus huevos</li>
+                        <li>Carbohidratos: ~80g</li>
+                        <li>Fácil, rápido, tradicional</li>
+                    </ul>
+                    
+                    <p><strong>Opción B - Pan + Fruta:</strong></p>
+                    <ul>
+                        <li>2 rebanadas de pan integral</li>
+                        <li>1 banano grande o 1 taza de papaya</li>
+                        <li>Carbohidratos: ~85g</li>
+                    </ul>
+                    
+                    <p><strong>Opción C - Arroz blanco:</strong></p>
+                    <ul>
+                        <li>1 taza de arroz blanco cocido</li>
+                        <li>Carbohidratos: ~45g</li>
+                        <li>+ 1 banano (35g) = 80g total</li>
+                    </ul>
+                    
+                    <p><strong>Opción D - Avena:</strong></p>
+                    <ul>
+                        <li>1 taza de avena cocida</li>
+                        <li>+ 1 banano picado</li>
+                        <li>+ 1 cucharada de miel</li>
+                        <li>Carbohidratos: ~90g</li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 20px;">Desayuno Completo Sugerido</h3>
+                    <div style="background: white; padding: 15px; border-radius: 8px;">
+                        <p><strong>4 huevos revueltos</strong> (28g proteína)</p>
+                        <p><strong>3 tortillas de maíz</strong> (80g carbohidratos)</p>
+                        <p><strong>1/2 aguacate</strong> (grasas saludables)</p>
+                        <p><strong>Queso al gusto</strong> (proteína extra)</p>
+                        <p><strong>Café</strong></p>
+                        <p style="margin-top: 10px; font-weight: 700;">Total: ~30g proteína + 80g carbos + 20g grasas</p>
+                        <p style="color: #28a745;">✅ Ratio 3:1 perfecto para recuperación</p>
+                    </div>
+                    
+                    <h3 style="margin-top: 20px;">Timing</h3>
+                    <p><strong>Dentro de 30-60 min post-entreno</strong> (como ya lo haces)</p>
+                    <p>Lo único que cambia es AGREGAR carbohidratos. Todo lo demás queda igual.</p>
+                </div>
+                
+                <!-- AJUSTE 4 -->
+                <div class="card warning">
+                    <h2 style="color: #856404; margin-bottom: 15px;">🍚 AJUSTE #4: Carbohidratos Periodizados en Almuerzo/Cena</h2>
+                    <span class="badge badge-warning">IMPORTANTE</span>
+                    <span class="badge" style="background: #E8924C; color: white;">IMPLEMENTAR SEMANA 3</span>
+                    
+                    <h3 style="margin-top: 20px;">Qué Cambiar</h3>
+                    <p><strong>Actual:</strong> "Alguna proteína y ensalada" (evitando carbos)</p>
+                    <p><strong>Nuevo:</strong> Proteína + ensalada + CARBOHIDRATOS (periodizados según tipo de día)</p>
+                    
+                    <h3 style="margin-top: 20px;">Sistema de Periodización</h3>
+                    
+                    <div style="background: #D4EDDA; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4 style="color: #155724;">DÍA DE ENTRENO INTENSO (Intervalos, Subidas, >1.5h)</h4>
+                        <p><strong>Almuerzo:</strong></p>
+                        <ul>
+                            <li>Proteína 120-150g (pollo, carne, pescado)</li>
+                            <li>Arroz blanco o pasta: 1.5 tazas cocido (~80g carbos)</li>
+                            <li>Ensalada grande</li>
+                            <li>1 cucharada aceite oliva</li>
+                        </ul>
+                        <p><strong>Cena:</strong></p>
+                        <ul>
+                            <li>Proteína 120g</li>
+                            <li>Arroz/pasta/papa: 1 taza cocido (~45g carbos)</li>
+                            <li>Vegetales</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: #FFF3CD; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4 style="color: #856404;">DÍA DE ENTRENO BASE (Resistencia suave-moderada, <1.5h)</h4>
+                        <p><strong>Almuerzo:</strong></p>
+                        <ul>
+                            <li>Proteína 120-150g</li>
+                            <li>Arroz/pasta: 1 taza cocido (~45g carbos)</li>
+                            <li>Ensalada grande</li>
+                        </ul>
+                        <p><strong>Cena:</strong></p>
+                        <ul>
+                            <li>Proteína 120g</li>
+                            <li>Papa dulce/camote: 1 mediano (~30g carbos)</li>
+                            <li>Vegetales</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: #F5FAF8; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4 style="color: #2D4A3E;">DÍA DE DESCANSO</h4>
+                        <p><strong>Almuerzo:</strong></p>
+                        <ul>
+                            <li>Proteína 120-150g</li>
+                            <li>Arroz: 1/2 taza (~25g carbos) o vegetales con almidón</li>
+                            <li>Ensalada grande</li>
+                        </ul>
+                        <p><strong>Cena:</strong></p>
+                        <ul>
+                            <li>Proteína 120g</li>
+                            <li>Sin carbohidratos con almidón (solo vegetales)</li>
+                            <li>Aquí SÍ puedes hacer "proteína + ensalada"</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 style="margin-top: 20px;">Resumen Visual</h3>
+                    <table>
+                        <tr>
+                            <th>Tipo de Día</th>
+                            <th>Carbos Almuerzo</th>
+                            <th>Carbos Cena</th>
+                            <th>Total Día</th>
+                        </tr>
+                        <tr>
+                            <td>Entreno Intenso</td>
+                            <td>80g</td>
+                            <td>45g</td>
+                            <td>~350-400g</td>
+                        </tr>
+                        <tr>
+                            <td>Entreno Base</td>
+                            <td>45g</td>
+                            <td>30g</td>
+                            <td>~250-300g</td>
+                        </tr>
+                        <tr>
+                            <td>Descanso</td>
+                            <td>25g</td>
+                            <td>0g</td>
+                            <td>~150-180g</td>
+                        </tr>
+                    </table>
+                    
+                    <p style="margin-top: 15px;"><strong>Este sistema te permite:</strong></p>
+                    <ul>
+                        <li>✅ Tener energía para entrenar fuerte</li>
+                        <li>✅ Recuperar glucógeno entre sesiones</li>
+                        <li>✅ Controlar calorías en días de descanso</li>
+                        <li>✅ Perder grasa SIN sacrificar rendimiento</li>
+                    </ul>
+                </div>
+                
+                <!-- AJUSTE 5 -->
+                <div class="card">
+                    <h2 style="color: #2D4A3E; margin-bottom: 15px;">🎯 AJUSTE #5: Definir Prioridad para Enero-Marzo</h2>
+                    <span class="badge badge-warning">ESTRATÉGICO</span>
+                    <span class="badge" style="background: #E8924C; color: white;">IMPLEMENTAR SEMANA 4</span>
+                    
+                    <h3 style="margin-top: 20px;">El Problema</h3>
+                    <p>Tienes 6 objetivos simultáneos: mejorar rendimiento, perder grasa, ganar músculo, más energía, mejor recovery, competencia específica.</p>
+                    <p><strong>Fisiológicamente imposible optimizar todo al mismo tiempo.</strong></p>
+                    
+                    <h3 style="margin-top: 20px;">Las Opciones</h3>
+                    
+                    <div style="background: #E8F3EF; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                        <h4 style="color: #2D4A3E;">OPCIÓN A: Priorizar Rendimiento (Recomendado para Enero-Marzo)</h4>
+                        <p><strong>Objetivo:</strong> Maximizar FTP, potencia, resistencia para competencias</p>
+                        
+                        <p style="margin-top: 15px;"><strong>Estrategia Nutricional:</strong></p>
+                        <ul>
+                            <li>Calorías: Mantenimiento o ligero superávit (+100-200 kcal/día)</li>
+                            <li>Carbohidratos: 5-6g/kg (350-420g/día)</li>
+                            <li>Proteína: 2g/kg (140g/día)</li>
+                            <li>Grasas: 1g/kg (70g/día)</li>
+                        </ul>
+                        
+                        <p style="margin-top: 15px;"><strong>Qué esperar:</strong></p>
+                        <ul>
+                            <li>✅ Mejora FTP en 10-15 watts en 8-12 semanas</li>
+                            <li>✅ Mejor recuperación entre entrenamientos</li>
+                            <li>✅ Posible ganancia muscular 1-2kg</li>
+                            <li>⚠️ Peso estable o ligero aumento</li>
+                            <li>⚠️ NO pérdida de grasa significativa</li>
+                        </ul>
+                        
+                        <p style="margin-top: 15px;"><strong>Cuándo elegir esto:</strong> Si tu prioridad es GANAR competencias en enero-marzo. La composición corporal la trabajamos después en fase de descanso competitivo.</p>
+                    </div>
+                    
+                    <div style="background: #FFF8F5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                        <h4 style="color: #E8924C;">OPCIÓN B: Composición Corporal + Mantener Rendimiento</h4>
+                        <p><strong>Objetivo:</strong> Perder 3-5kg de grasa manteniendo potencia actual</p>
+                        
+                        <p style="margin-top: 15px;"><strong>Estrategia Nutricional:</strong></p>
+                        <ul>
+                            <li>Calorías: Déficit moderado (-300-400 kcal/día)</li>
+                            <li>Carbohidratos: Periodizados (altos días entreno, bajos descanso) - promedio 4g/kg</li>
+                            <li>Proteína: MUY alta 2.3-2.5g/kg (160-175g/día)</li>
+                            <li>Grasas: 0.8g/kg (55g/día)</li>
+                        </ul>
+                        
+                        <p style="margin-top: 15px;"><strong>Qué esperar:</strong></p>
+                        <ul>
+                            <li>✅ Pérdida 0.5-0.7kg/semana (3-5kg en 8 semanas)</li>
+                            <li>✅ Mantenimiento de músculo</li>
+                            <li>✅ Mantenimiento de FTP (no baja)</li>
+                            <li>⚠️ Entrenamientos de muy alta intensidad más duros</li>
+                            <li>⚠️ Recovery ligeramente más lento</li>
+                        </ul>
+                        
+                        <p style="margin-top: 15px;"><strong>Cuándo elegir esto:</strong> Si crees que tu peso actual está afectando tu rendimiento en subidas, o si prefieres llegar más liviano a competencias.</p>
+                    </div>
+                    
+                    <h3 style="margin-top: 20px;">Mi Recomendación</h3>
+                    <div style="background: #D4EDDA; padding: 20px; border-radius: 8px;">
+                        <p><strong>OPCIÓN A: Priorizar Rendimiento</strong></p>
+                        <p style="margin-top: 10px;"><strong>Razón:</strong> Dijiste que competencias empiezan en enero. Necesitas llegar en tu mejor forma, no en déficit calórico. Además, actualmente estás en un estado de bajo combustible crónico - primero necesitas "rellenar el tanque" y ver tu verdadero potencial ANTES de pensar en composición corporal.</p>
+                        <p style="margin-top: 10px;"><strong>Plan:</strong></p>
+                        <ul>
+                            <li><strong>Enero-Marzo:</strong> Rendimiento máximo (Opción A)</li>
+                            <li><strong>Abril-Mayo:</strong> Fase de composición corporal (Opción B)</li>
+                            <li><strong>Junio+:</strong> Mantenimiento y picos de forma</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PLAN COMPETENCIA -->
+            <div id="plan-comp" class="section">
+                <h2 class="section-title">🚴 Plan Nutricional para Competencias</h2>
+                
+                <div class="info-box">
+                    <p><strong>📅 Aplicar desde:</strong> Enero 2025 (cuando inicien competencias)</p>
+                    <p><strong>🎯 Objetivo:</strong> Optimizar energía disponible durante carrera + minimizar problemas digestivos</p>
+                </div>
+                
+                <h3 class="subsection-title">Protocolo Competencia MTB (Ejemplo: 50-100km)</h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>3 DÍAS ANTES: Carga de Glucógeno</h4>
+                        <p><strong>Objetivo:</strong> Llenar reservas musculares de glucógeno al máximo</p>
+                        <ul>
+                            <li>Aumentar carbohidratos a 7-8g/kg (490-560g/día)</li>
+                            <li>Entrenamientos MUY suaves o descanso</li>
+                            <li>Hidratación alta (3-4L/día)</li>
+                        </ul>
+                        <p><strong>Ejemplo de día:</strong></p>
+                        <ul>
+                            <li>Desayuno: Avena grande + bananos + miel + huevos</li>
+                            <li>Almuerzo: Arroz blanco abundante + pollo + vegetales</li>
+                            <li>Merienda: Pan + mermelada + batido de frutas</li>
+                            <li>Cena: Pasta con salsa de tomate + proteína</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>NOCHE ANTES: Cena Estratégica</h4>
+                        <p><strong>Objetivo:</strong> Carbohidratos de digestión lenta para energía sostenida</p>
+                        <ul>
+                            <li>Cenar 3-4 horas antes de dormir</li>
+                            <li>Alto en carbohidratos, moderado en proteína, bajo en grasa</li>
+                            <li>Evitar: fibra excesiva, lácteos si sos sensible, comida nueva</li>
+                        </ul>
+                        <p><strong>Ejemplo:</strong></p>
+                        <ul>
+                            <li>Arroz blanco 2 tazas</li>
+                            <li>Pechuga de pollo 120g</li>
+                            <li>Vegetales cocidos</li>
+                            <li>Pan blanco</li>
+                            <li>Agua abundante</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>MAÑANA DE CARRERA: 2.5-3h ANTES</h4>
+                        <p><strong>Objetivo:</strong> Maximizar glucógeno sin molestias digestivas</p>
+                        <p><strong>Opción A - Desayuno completo:</strong></p>
+                        <ul>
+                            <li>2-3 panqueques con miel/jarabe</li>
+                            <li>1 banano</li>
+                            <li>Café (si acostumbras)</li>
+                            <li>Carbohidratos: 80-100g</li>
+                        </ul>
+                        <p><strong>Opción B - Ligero:</strong></p>
+                        <ul>
+                            <li>2 tostadas con mermelada</li>
+                            <li>1 banano</li>
+                            <li>Café</li>
+                            <li>Carbohidratos: 60-70g</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>30-45 MIN ANTES: Top-Off</h4>
+                        <p><strong>Objetivo:</strong> Última carga de energía rápida</p>
+                        <ul>
+                            <li>1 gel deportivo (25g carbos)</li>
+                            <li>o 1 banano pequeño</li>
+                            <li>Agua 200-300ml</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>DURANTE CARRERA: Cada 20-30 Min</h4>
+                        <p><strong>Objetivo:</strong> 60-90g carbohidratos por hora</p>
+                        
+                        <table style="margin-top: 15px;">
+                            <tr>
+                                <th>Duración</th>
+                                <th>Estrategia</th>
+                                <th>Carbos/hora</th>
+                            </tr>
+                            <tr>
+                                <td>1-2 horas</td>
+                                <td>Bebida deportiva</td>
+                                <td>40-50g</td>
+                            </tr>
+                            <tr>
+                                <td>2-3 horas</td>
+                                <td>Bebida + 1 gel/hora</td>
+                                <td>60-70g</td>
+                            </tr>
+                            <tr>
+                                <td>3+ horas</td>
+                                <td>Bebida + 2 geles/hora o geles + barritas</td>
+                                <td>70-90g</td>
+                            </tr>
+                        </table>
+                        
+                        <p style="margin-top: 15px;"><strong>Sistema de Alarmas:</strong></p>
+                        <ul>
+                            <li>Programa alarma cada 20 min en tu reloj/ciclocomputadora</li>
+                            <li>Cada alarma = consumir algo (gel, trago de bebida, mordida de barrita)</li>
+                            <li>NO esperar a tener hambre o sentirse débil</li>
+                        </ul>
+                        
+                        <p><strong>Hidratación:</strong></p>
+                        <ul>
+                            <li>500-750ml/hora dependiendo del calor</li>
+                            <li>Bebida con electrolitos (sodio: 500-700mg/L)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>INMEDIATO POST-CARRERA: 0-30 Min</h4>
+                        <p><strong>Objetivo:</strong> Detener catabolismo, iniciar recuperación</p>
+                        <ul>
+                            <li>Bebida de recuperación: 3:1 carbos:proteína</li>
+                            <li>Ejemplo: 60g carbos + 20g proteína</li>
+                            <li>Opción fácil: Batido recuperación comercial</li>
+                            <li>Opción casera: Leche con chocolate + banano</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>1-2 HORAS POST: Comida Real</h4>
+                        <p><strong>Objetivo:</strong> Reponer glucógeno, reconstruir músculo</p>
+                        <ul>
+                            <li>Arroz/pasta abundante (2 tazas)</li>
+                            <li>Proteína 150-200g (carne, pollo, pescado)</li>
+                            <li>Vegetales</li>
+                            <li>Postre: Fruta o algo dulce</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">Checklist Pre-Carrera</h3>
+                
+                <div class="card">
+                    <h4>📦 Nutrición para Llevar (Ejemplo carrera 80km ~ 3-4h)</h4>
+                    <ul>
+                        <li>✓ 6-8 geles energéticos</li>
+                        <li>✓ 2-3 barritas energéticas</li>
+                        <li>✓ 2 bidones con bebida deportiva (sales + carbohidratos)</li>
+                        <li>✓ 1 bidón solo agua</li>
+                        <li>✓ Alimento sólido si >4h (sandwich PB&J cortado, bananos)</li>
+                        <li>✓ 2-3 cápsulas de sal/electrolitos si hace mucho calor</li>
+                    </ul>
+                    
+                    <p style="margin-top: 15px;"><strong>Dónde llevar:</strong></p>
+                    <ul>
+                        <li>Geles: En bolsillos de jersey, fácil acceso</li>
+                        <li>Barritas: Bolsillo trasero central</li>
+                        <li>Todo en orden cronológico (lo que usas primero adelante)</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <strong>⚠️ CRÍTICO:</strong> NUNCA pruebes alimentos o geles nuevos el día de carrera. TODO debe estar probado en entrenamientos largos previamente. Tu sistema digestivo necesita "entrenarse" también.
+                </div>
+            </div>
+            
+            <!-- IMPLEMENTACIÓN -->
+            <div id="implementacion" class="section">
+                <h2 class="section-title">📊 Plan de Implementación Semana por Semana</h2>
+                
+                <div class="card highlight">
+                    <h3>🎯 Filosofía de Implementación</h3>
+                    <p><strong>No cambiar todo de golpe.</strong> Tu cuerpo (y tu mente) necesitan adaptarse gradualmente. Un cambio por semana es sostenible. Cinco cambios simultáneos NO lo son.</p>
+                </div>
+                
+                <h3 class="subsection-title">Cronograma de 4 Semanas</h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>SEMANA 1: Carbohidratos Durante Entreno</h4>
+                        <p><strong>Fecha inicio sugerida:</strong> 25 Nov - 1 Dic</p>
+                        
+                        <p><strong>Cambio único:</strong></p>
+                        <ul>
+                            <li>Agregar 30-40g carbos por hora en entrenamientos >1h</li>
+                            <li>TODO LO DEMÁS queda igual</li>
+                        </ul>
+                        
+                        <p><strong>Protocolo:</strong></p>
+                        <ul>
+                            <li><strong>Lunes:</strong> Primer entreno con gel. Empieza tomándolo a los 30 min de entreno.</li>
+                            <li><strong>Miércoles:</strong> Segundo entreno. Prueba tomar el gel a los 20 min esta vez.</li>
+                            <li><strong>Viernes:</strong> Si todo va bien, agrega OTRO gel a la hora de entreno.</li>
+                            <li><strong>Domingo (entreno largo):</strong> Aplica el protocolo completo: 1 gel cada 30-40 min.</li>
+                        </ul>
+                        
+                        <p><strong>Qué monitorear:</strong></p>
+                        <ul>
+                            <li>¿Molestias digestivas? (normal los primeros 2-3 entrenos)</li>
+                            <li>¿Cambio en energía percibida?</li>
+                            <li>¿Potencia promedio del entreno? (debería subir 5-10w)</li>
+                        </ul>
+                        
+                        <p><strong>Meta semana:</strong> Completar 4-5 entrenamientos con carbohidratos sin problemas digestivos.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>SEMANA 2: Pre-Entreno + Post-Entreno con Carbos</h4>
+                        <p><strong>Fecha:</strong> 2-8 Diciembre</p>
+                        
+                        <p><strong>Cambios esta semana:</strong></p>
+                        <ul>
+                            <li><strong>Agregar:</strong> Pre-entreno estratégico (Ajuste #2)</li>
+                            <li><strong>Agregar:</strong> Carbohidratos en desayuno post-entreno (Ajuste #3)</li>
+                            <li><strong>Mantener:</strong> Carbos durante entreno de semana 1</li>
+                        </ul>
+                        
+                        <p><strong>Protocolo pre-entreno:</strong></p>
+                        <ul>
+                            <li>Empieza simple: 1 banano + café, 20 min antes</li>
+                            <li>Si te sienta bien, mantén</li>
+                            <li>Si sientes "pesadez", prueba solo 1/2 banano o hazlo más líquido (smoothie)</li>
+                        </ul>
+                        
+                        <p><strong>Protocolo desayuno:</strong></p>
+                        <ul>
+                            <li>Agrega 3 tortillas a tus 4 huevos actuales</li>
+                            <li>Mantén aguacate y queso</li>
+                        </ul>
+                        
+                        <p><strong>Meta semana:</strong> Sentir más explosividad en primeros 30 min de entreno. Recuperación más rápida entre entrenamientos.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>SEMANA 3: Periodización Almuerzo/Cena</h4>
+                        <p><strong>Fecha:</strong> 9-15 Diciembre</p>
+                        
+                        <p><strong>Cambio esta semana:</strong></p>
+                        <ul>
+                            <li><strong>Implementar:</strong> Sistema de periodización de carbohidratos (Ajuste #4)</li>
+                            <li><strong>Mantener:</strong> Todo de semanas 1 y 2</li>
+                        </ul>
+                        
+                        <p><strong>Protocolo:</strong></p>
+                        <ul>
+                            <li>Planificar tus entrenamientos de la semana el domingo</li>
+                            <li>Clasificar cada día: Intenso / Base / Descanso</li>
+                            <li>Ajustar porciones de arroz según tipo de día</li>
+                        </ul>
+                        
+                        <p><strong>Ejemplo práctico:</strong></p>
+                        <table>
+                            <tr>
+                                <th>Día</th>
+                                <th>Entreno</th>
+                                <th>Tipo</th>
+                                <th>Arroz Almuerzo</th>
+                            </tr>
+                            <tr>
+                                <td>Lunes</td>
+                                <td>Intervalos 4x8min</td>
+                                <td>Intenso</td>
+                                <td>1.5 tazas</td>
+                            </tr>
+                            <tr>
+                                <td>Martes</td>
+                                <td>Base 1h suave</td>
+                                <td>Base</td>
+                                <td>1 taza</td>
+                            </tr>
+                            <tr>
+                                <td>Miércoles</td>
+                                <td>Descanso</td>
+                                <td>Descanso</td>
+                                <td>1/2 taza</td>
+                            </tr>
+                        </table>
+                        
+                        <p><strong>Meta semana:</strong> Sentir que tienes energía adecuada para cada tipo de entreno. En días de descanso, no sentir "falta" de carbohidratos.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>SEMANA 4: Definir Objetivo + Ajuste Fino</h4>
+                        <p><strong>Fecha:</strong> 16-22 Diciembre</p>
+                        
+                        <p><strong>Evaluación de progreso:</strong></p>
+                        <ul>
+                            <li>Comparar potencia promedio entrenamientos semana 1 vs semana 4</li>
+                            <li>Evaluar recuperación: ¿Te sientes más fresco?</li>
+                            <li>Medir peso y evaluar composición corporal</li>
+                            <li>Revisar calidad de sueño y estado anímico</li>
+                        </ul>
+                        
+                        <p><strong>Decisión estratégica:</strong></p>
+                        <ul>
+                            <li>Basado en cómo te sentiste estas 3 semanas</li>
+                            <li>Basado en tus competencias de enero</li>
+                            <li>Elegir: ¿Prioridad A (rendimiento) o B (composición)?</li>
+                        </ul>
+                        
+                        <p><strong>Ajustes finos:</strong></p>
+                        <ul>
+                            <li>Si elegiste OPCIÓN A: Aumentar carbos otros 20-30g/día</li>
+                            <li>Si elegiste OPCIÓN B: Mantener carbos actuales pero entrar en déficit calórico leve</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">Tracking y Monitoreo</h3>
+                
+                <div class="card">
+                    <h3>📊 Métricas para Trackear</h3>
+                    
+                    <p><strong>Métricas Objetivas (semanales):</strong></p>
+                    <ul>
+                        <li><strong>Potencia promedio:</strong> Anota tu potencia normalizada de entrenamientos clave</li>
+                        <li><strong>Frecuencia cardíaca:</strong> FC promedio y FC máxima en esfuerzos</li>
+                        <li><strong>Percepción esfuerzo:</strong> ¿El mismo entreno se siente más fácil?</li>
+                        <li><strong>Peso corporal:</strong> Medir lunes en ayunas (solo para referencia)</li>
+                        <li><strong>Calidad sueño:</strong> ¿Duermes mejor? ¿Te levantas descansado?</li>
+                    </ul>
+                    
+                    <p><strong>Métricas Subjetivas (diarias):</strong></p>
+                    <ul>
+                        <li>Nivel de energía 1-10</li>
+                        <li>Hambre/saciedad</li>
+                        <li>Problemas digestivos (sí/no)</li>
+                        <li>Estado anímico</li>
+                    </ul>
+                    
+                    <p><strong>Herramienta simple:</strong></p>
+                    <p>Crea nota en tu celular. Cada noche antes de dormir, apunta:</p>
+                    <ul>
+                        <li>Energía: X/10</li>
+                        <li>Entreno de hoy: [tipo] - Sensación: [bien/regular/mal]</li>
+                        <li>Problemas digestivos: sí/no</li>
+                    </ul>
+                </div>
+                
+                <h3 class="subsection-title">Troubleshooting Común</h3>
+                
+                <div class="card warning">
+                    <h4>❓ "Me siento muy lleno/pesado con los carbos"</h4>
+                    <p><strong>Causa:</strong> Tu sistema digestivo está adaptado a bajo volumen de carbohidratos.</p>
+                    <p><strong>Solución:</strong></p>
+                    <ul>
+                        <li>Reduce porciones a la mitad por 1 semana</li>
+                        <li>Aumenta gradualmente cada 3-4 días</li>
+                        <li>Prioriza carbohidratos de fácil digestión (arroz blanco, pan blanco, bananos)</li>
+                        <li>Evita legumbres y vegetales alta fibra temporalmente</li>
+                    </ul>
+                </div>
+                
+                <div class="card warning">
+                    <h4>❓ "Me dan problemas estomacales con geles durante entreno"</h4>
+                    <p><strong>Causa:</strong> Estómago no entrenado para procesar carbohidratos en movimiento.</p>
+                    <p><strong>Solución:</strong></p>
+                    <ul>
+                        <li>Empieza con bebida deportiva líquida (más fácil de digerir)</li>
+                        <li>Si usas geles, tómalos con MUCHA agua (200-300ml)</li>
+                        <li>Prueba diferentes marcas (algunos toleran mejor Maurten, otros GU)</li>
+                        <li>Alterna gel + agua con barrita + agua</li>
+                        <li>Dale 2-3 semanas de adaptación</li>
+                    </ul>
+                </div>
+                
+                <div class="card warning">
+                    <h4>❓ "Subí 1-2kg de peso"</h4>
+                    <p><strong>Causa:</strong> Cada gramo de glucógeno almacena 3g de agua. Es NORMAL y ESPERADO.</p>
+                    <p><strong>Explicación:</strong></p>
+                    <ul>
+                        <li>Si antes tenías 300g de glucógeno almacenado</li>
+                        <li>Ahora tienes 500g de glucógeno</li>
+                        <li>Esos 200g extra de glucógeno traen 600g de agua</li>
+                        <li>= 800g de peso extra = más ENERGÍA disponible</li>
+                    </ul>
+                    <p><strong>Esto NO es grasa. Es combustible.</strong> Si tu objetivo es perder grasa, lo hacemos DESPUÉS de rellenar tus reservas.</p>
+                </div>
+                
+                <div class="card warning">
+                    <h4>❓ "No noto diferencia en rendimiento"</h4>
+                    <p><strong>Posibles causas:</strong></p>
+                    <ul>
+                        <li>Solo han pasado 1-2 semanas (dale 3-4 semanas)</li>
+                        <li>No estás comiendo suficientes carbohidratos aún</li>
+                        <li>Tu entrenamiento no tiene suficiente intensidad para ver la diferencia</li>
+                        <li>Necesitas descanso/recuperación (overtraining)</li>
+                    </ul>
+                    <p><strong>Solución:</strong> Haz un test de FTP en semana 4 y compara con tu FTP actual.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div style="background: #F5F9F7; padding: 30px; text-align: center; color: #6c757d; font-size: 14px;">
+            <p style="margin-bottom: 10px;"><strong style="color: #2D4A3E;">eat&flow | Nutrición Deportiva</strong></p>
+            <p>Isa Herra | Atleta & Especialista en Rendimiento</p>
+            <p style="margin-top: 15px;">📱 WhatsApp: +506 8312 9092</p>
+            <p>📧 isa13nov@gmail.com</p>
+            <p>📍 Costa Rica | Instagram: @isaherra</p>
+            
+            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #E8F3EF;">
+                <p style="font-size: 13px;"><strong>Próximo paso:</strong> Videollamada de 20 min para repasar dudas y ajustes</p>
+                <p style="font-size: 13px; margin-top: 5px;">Coordinemos por WhatsApp 💪</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active to clicked tab
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>
