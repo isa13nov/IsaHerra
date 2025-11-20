@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Nutricional Completo | Isa Herra</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #F5F9F7 0%, #E8F3EF 100%);
+            color: #2D4A3E;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            padding: 40px;
+        }
+        
+        .main-header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 4px solid #E8924C;
+            padding-bottom: 30px;
+        }
+        
+        .main-header h1 {
+            color: #2D4A3E;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .main-header p {
+            color: #6c757d;
+            font-size: 18px;
+        }
+        
+        .section-title {
+            color: #2D4A3E;
+            font-size: 28px;
+            margin: 50px 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #9ECDB3;
+        }
+        
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 30px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid #2D4A3E;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #2D4A3E 0%, #3D5A4E 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid #2D4A3E;
+        }
+        
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        td:first-child {
+            background: #F5FAF8;
+            font-weight: 600;
+            text-align: left;
+            color: #2D4A3E;
+            white-space: nowrap;
+        }
+        
+        tr:nth-child(even) {
+            background: #FAFAFA;
+        }
+        
+        .macro-item {
+            margin-bottom: 8px;
+        }
+        
+        .macro-value {
+            color: #E8924C;
+            font-weight: 600;
+        }
+        
+        .optional {
+            color: #6c757d;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        .note {
+            background: #FFF8F5;
+            border-left: 4px solid #E8924C;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+        
+        .note ul {
+            margin-left: 20px;
+            margin-top: 10px;
+            line-height: 1.8;
+        }
+        
+        /* Protocolo styles */
+        .intro {
+            background: linear-gradient(135deg, #FFF8F5 0%, #FFF3EB 100%);
+            border-left: 4px solid #E8924C;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+        
+        .intro strong {
+            color: #E8924C;
+        }
+        
+        .protocol-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .protocol-list li {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #F5FAF8;
+            border-radius: 12px;
+            border-left: 4px solid #9ECDB3;
+            transition: all 0.3s;
+        }
+        
+        .protocol-list li:hover {
+            background: #E8F3EF;
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(45, 74, 62, 0.1);
+        }
+        
+        .hora {
+            color: #2D4A3E;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .comida {
+            color: #E8924C;
+            font-style: italic;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .macros {
+            color: #2D4A3E;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+        
+        .macros strong {
+            color: #E8924C;
+            font-weight: 600;
+        }
+        
+        .ruta-metabolica {
+            background: #FFFBEA;
+            border: 2px dashed #FFD700;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        
+        .ruta-metabolica strong {
+            color: #DAA520;
+        }
+        
+        .tipo-carbo {
+            display: inline-block;
+            background: white;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin: 4px 3px;
+            border: 1px solid #9ECDB3;
+            color: #2D4A3E;
+            font-weight: 600;
+        }
+        
+        .tipo-carbo.simple {
+            border-color: #E8924C;
+            background: #FFF8F5;
+        }
+        
+        .tipo-carbo.complejo {
+            border-color: #2D4A3E;
+            background: #F5FAF8;
+        }
+        
+        .nota-importante {
+            background: #FFF3CD;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #E8F3EF;
+            text-align: center;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 30px;
+            }
+            
+            .protocol-list li:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .main-header h1 {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 22px;
+            }
+            
+            th, td {
+                padding: 8px;
+                font-size: 12px;
+            }
+            
+            .protocol-list li {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-header">
+            <h1>Plan Nutricional Completo</h1>
+            <p>Distribución de macronutrientes semanal y protocolo de competencia</p>
+        </div>
+        
+        <!-- SECCIÓN 1: PLAN SEMANAL -->
+        <h2 class="section-title">Plan Semanal de Comidas - Macros</h2>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Día</th>
+                        <th>Preentreno</th>
+                        <th>Desayuno</th>
+                        <th>Almuerzo</th>
+                        <th>Merienda</th>
+                        <th>Cena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>Lunes</strong><br>
+                            Bici suave<br>
+                            + core
+                        </td>
+                        <td>
+                            <div class="macro-item">Bebida verde</div>
+                            <div class="optional">Opcional: Aminoácidos</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">25g</span> proteína</div>
+                            <div class="macro-item"><span class="macro-value">40g</span> carbohidratos</div>
+                            <div class="macro-item"><span class="macro-value">10g</span> grasas saludables</div>
+                            <div class="macro-item"><span class="macro-value">1L</span> café negro al día</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">120g</span> proteína (peso cruda)</div>
+                            <div class="macro-item"><span class="macro-value">50g</span> carbohidratos</div>
+                            <div class="macro-item"><span class="macro-value">150g</span> verduras al vapor</div>
+                            <div class="macro-item"><span class="macro-value">15g</span> aceite de oliva</div>
+                            <div class="macro-item">1 fruta pequeña</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">50g</span> legumbres</div>
+                            <div class="macro-item">+ salsa casera</div>
+                            <div class="macro-item"><span class="macro-value">20g</span> frutos secos</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">120g</span> proteína (peso cruda)</div>
+                            <div class="macro-item"><span class="macro-value">200g</span> verduras</div>
+                            <div class="macro-item"><span class="macro-value">50g</span> carbohidratos</div>
+                            <div class="macro-item"><span class="macro-value">1/2</span> aguacate</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Martes</strong><br>
+                            Intervalos<br>
+                            en subida
+                        </td>
+                        <td>
+                            <div class="macro-item">Bebida verde</div>
+                            <div class="optional">Opcional: Aminoácidos</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">25g</span> proteína</div>
+                            <div class="macro-item"><span class="macro-value">25g</span> carbohidratos</div>
+                            <div class="macro-item"><span class="macro-value">80g</span> carbohidratos adicionales</div>
+                            <div class="macro-item"><span class="macro-value">1L</span> café negro al día</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">120g</span> proteína (peso cruda)</div>
+                            <div class="macro-item"><span class="macro-value">120g</span> carbohidratos cocidos</div>
+                            <div class="macro-item"><span class="macro-value">150g</span> verduras al vapor</div>
+                            <div class="macro-item"><span class="macro-value">50g</span> legumbres cocidas</div>
+                            <div class="macro-item"><span class="macro-value">15g</span> aceite de oliva</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">30g</span> proteína</div>
+                            <div class="macro-item"><span class="macro-value">30g</span> carbohidratos</div>
+                            <div class="macro-item"><span class="macro-value">20g</span> frutos secos</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">120g</span> proteína (peso cruda)</div>
+                            <div class="macro-item"><span class="macro-value">200g</span> verduras</div>
+                            <div class="macro-item"><span class="macro-value">15g</span> aceite de oliva</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Miércoles</strong><br>
+                            Bici suave<br>
+                            + core
+                        </td>
+                        <td>
+                            <div class="macro-item">Bebida verde</div>
+                            <div class="optional">Opcional: Aminoácidos</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">25g</span> proteína</div>
+                            <div class="macro-item"><span class="macro-value">40g</span> carbohidratos</div>
+                            <div class="macro-item"><span class="macro-value">80g</span> carbohidratos adicionales</div>
+                            <div class="macro-item"><span class="macro-value">10g</span> grasas saludables</div>
+                            <div class="macro-item"><span class="macro-value">1L</span> café negro al día</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">120g</span> proteína (peso cruda)</div>
+                            <div class="macro-item"><span class="macro-value">100g</span> carbohidratos cocidos</div>
+                            <div class="macro-item"><span class="macro-value">150g</span> verduras al vapor</div>
+                            <div class="macro-item"><span class="macro-value">15g</span> aceite de oliva</div>
+                            <div class="macro-item">4 fresas + 5 almendras</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">85g</span> yogurt griego natural</div>
+                            <div class="macro-item">+ sal + pimienta</div>
+                            <div class="macro-item">sobre 1 salma</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">120g</span> proteína (peso cruda)</div>
+                            <div class="macro-item"><span class="macro-value">200g</span> verduras</div>
+                            <div class="macro-item"><span class="macro-value">50g</span> carbohidratos</div>
+                            <div class="macro-item"><span class="macro-value">1/2</span> aguacate</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Jueves</strong><br>
+                            VO2max<br>
+                            en subida
+                        </td>
+                        <td>
+                            <div class="macro-item">Bebida verde</div>
+                            <div class="optional">Opcional: Aminoácidos</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">25g</span> proteína</div>
+                            <div class="macro-item"><span class="macro-value">35g</span> carbohidratos</div>
+                            <div class="macro-item"><span class="macro-value">15g</span> carbohidratos adicionales</div>
+                            <div class="macro-item"><span class="macro-value">10g</span> grasas</div>
+                            <div class="macro-item">Lácteo + fruta + canela</div>
+                            <div class="macro-item"><span class="macro-value">1L</span> café negro al día</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">130g</span> proteína (peso cruda)</div>
+                            <div class="macro-item"><span class="macro-value">70g</span> tubérculo</div>
+                            <div class="macro-item"><span class="macro-value">50g</span> carbohidratos</div>
+                            <div class="macro-item"><span class="macro-value">50g</span> legumbres</div>
+                            <div class="macro-item"><span class="macro-value">150g</span> verduras</div>
+                            <div class="macro-item"><span class="macro-value">10g</span> aguacate pequeño</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">30g</span> proteína</div>
+                            <div class="macro-item">5 fresas</div>
+                            <div class="macro-item">8 almendras</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">120g</span> proteína (peso cruda)</div>
+                            <div class="macro-item"><span class="macro-value">150g</span> verduras salteadas</div>
+                            <div class="macro-item"><span class="macro-value">1/2</span> aguacate</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Viernes</strong><br>
+                            Descanso<br>
+                            o Core<br>
+                            suave
+                        </td>
+                        <td>
+                            <div class="macro-item">Bebida verde</div>
+                            <div class="optional">1/2 taza de mango</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">25g</span> proteína</div>
+                            <div class="macro-item">1 tortilla masa casera (sin queso)</div>
+                            <div class="macro-item"><span class="macro-value">1L</span> café negro al día</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">120g</span> proteína (peso cruda)</div>
+                            <div class="macro-item"><span class="macro-value">150-200g</span> verduras</div>
+                            <div class="macro-item"><span class="macro-value">70g</span> tubérculo</div>
+                            <div class="macro-item"><span class="macro-value">15g</span> aceite de oliva</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">150g</span> yogurt natural</div>
+                            <div class="macro-item">+ vainilla</div>
+                            <div class="macro-item">+ canela</div>
+                            <div class="macro-item">5 almendras</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">120g</span> proteína (peso cruda)</div>
+                            <div class="macro-item"><span class="macro-value">200g</span> verduras</div>
+                            <div class="macro-item"><span class="macro-value">15g</span> aceite de oliva</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Sábado</strong><br>
+                            5-6 h
+                        </td>
+                        <td>
+                            <div class="macro-item">1 tortilla de masa (sin queso)</div>
+                            <div class="macro-item">+ 1 huevo</div>
+                            <div class="macro-item"><span class="macro-value">1/2</span> aguacate</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><strong>DURANTE ENTRENO:</strong></div>
+                            <div class="macro-item"><span class="macro-value">60-90g</span> carbohidratos por hora</div>
+                            <div class="macro-item">(fruta, gel o bebida isotónica)</div>
+                            <div class="macro-item">Sales/electrolitos según sudoración</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">110g</span> carbohidratos sin grasa</div>
+                            <div class="macro-item"><span class="macro-value">70g</span> tubérculo</div>
+                            <div class="macro-item"><span class="macro-value">150g</span> verduras</div>
+                            <div class="macro-item"><span class="macro-value">15g</span> aceite de oliva</div>
+                            <div class="macro-item"><span class="macro-value">120g</span> fruta</div>
+                        </td>
+                        <td>
+                            <div class="macro-item">1 salma</div>
+                            <div class="macro-item">+ 1 tortilla (1 huevo + 1 clara)</div>
+                            <div class="macro-item">+ tomate y albahaca</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">120g</span> proteína (peso cruda)</div>
+                            <div class="macro-item"><span class="macro-value">200g</span> verduras</div>
+                            <div class="macro-item"><span class="macro-value">1/2</span> aguacate</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Domingo</strong><br>
+                            2-3 h
+                        </td>
+                        <td>
+                            <div class="macro-item">Bebida verde</div>
+                            <div class="optional">1/2 taza de mango</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">25g</span> proteína</div>
+                            <div class="macro-item">2 tortillas de masa casera (sin queso)</div>
+                            <div class="macro-item"><span class="macro-value">1L</span> café negro</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">120g</span> proteína (peso cruda)</div>
+                            <div class="macro-item"><span class="macro-value">50g</span> carbohidratos</div>
+                            <div class="macro-item"><span class="macro-value">50g</span> legumbres</div>
+                            <div class="macro-item"><span class="macro-value">150g</span> verduras</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">30g</span> proteína</div>
+                            <div class="macro-item">5 fresas</div>
+                            <div class="macro-item">5 almendras</div>
+                        </td>
+                        <td>
+                            <div class="macro-item"><span class="macro-value">120g</span> proteína (peso cruda)</div>
+                            <div class="macro-item"><span class="macro-value">200g</span> verduras</div>
+                            <div class="macro-item"><span class="macro-value">15g</span> aceite de oliva</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="note">
+            <strong>Notas importantes:</strong>
+            <ul>
+                <li>Todos los pesos de proteína son en <strong>crudo</strong></li>
+                <li>Las cantidades de carbohidratos son <strong>peso cocido</strong> (arroz, pasta, quinoa, etc.)</li>
+                <li>Ajustar cantidades según peso corporal, intensidad de entrenamiento y objetivos específicos</li>
+                <li>Mantener hidratación constante: mínimo 2-3L agua al día, más durante entrenamientos</li>
+                <li>Durante entrenamientos largos (5-6h): 60-90g carbohidratos por hora</li>
+            </ul>
+        </div>
+        
+        <!-- SECCIÓN 2: PROTOCOLO COMPETENCIA -->
+        <h2 class="section-title">Protocolo Competencia – Fondo Largo</h2>
+        
+        <div class="intro">
+            <strong>Pauta por hora que alterna texturas y sabores (salado/dulce)</strong>, con marco de CHO estimado por hora. <strong>Ajusta según cómo te sientas.</strong>
+        </div>
+        
+        <ul class="protocol-list">
+            <li>
+                <span class="hora">Hora 0 (salida — antes de arrancar, 01:00–01:30):</span>
+                <span class="comida">Desayuno base</span>
+                <div class="macros">
+                    <strong>50-60g CHO</strong> <span class="tipo-carbo complejo">carbohidrato complejo</span><br>
+                    <strong>15-20g proteína</strong><br>
+                    <strong>5-8g grasas saludables</strong><br>
+                    <em>(aprox 70-80g CHO total - esto es pre-carga, no lo cuento dentro de las 10h)</em>
+                </div>
+                <div class="ruta-metabolica">
+                    <strong>Tipo de CHO:</strong> Predominantemente <strong>carbohidrato complejo de digestión lenta</strong> (avena, pan integral) + <strong>fructosa rápida</strong> (banana) para inicio de carga de glucógeno hepático
+                </div>
+            </li>
+            
+            <li>
+                <span class="hora">Hora 1 (2:00–3:00, primer tramo nocturno):</span>
+                <span class="comida">Primera comida salada</span>
+                <div class="macros">
+                    <strong>60-65g CHO</strong> <span class="tipo-carbo complejo">carbohidrato complejo</span> <span class="tipo-carbo simple">+ simple</span><br>
+                    (45g CHO de base compleja + 15g CHO simples añadidos)<br>
+                    <strong>15g proteína</strong> (opcional para sostenibilidad)
+                </div>
+                <div class="ruta-metabolica">
+                    <strong>Rutas metabólicas:</strong> Base de <strong>carbohidrato complejo</strong> (arroz, pasta) + añadir <strong>glucosa pura</strong> (azúcar, gel de glucosa) o <strong>maltodextrina</strong> en bebida para acelerar absorción
+                </div>
+            </li>
+            
+            <li>
+                <span class="hora">Hora 2:</span>
+                <span class="comida">Snacks rápidos dulces</span>
+                <div class="macros">
+                    <strong>57-60g CHO</strong> <span class="tipo-carbo simple">carbohidratos simples</span><br>
+                    (42.9g gel pequeño + 15g miel = aprox 57.9g)<br>
+                    <em>Si te molesta, podés quitar el gel y tomar isotónica (42.9 + 15 = 57.9g)</em>
+                </div>
+                <div class="ruta-metabolica">
+                    <strong>Rutas metabólicas:</strong> <strong>Fructosa + maltodextrina</strong> en gel + <strong>miel (fructosa+glucosa natural)</strong><br>
+                    Maximiza absorción usando transportadores SGLT1 (glucosa/maltodextrina) + GLUT5 (fructosa)<br>
+                    Ratio ideal: 1:0.8 (maltodextrina:fructosa)
+                </div>
+            </li>
+            
+            <li>
+                <span class="hora">Hora 3:</span>
+                <span class="comida">Puré salado + isotónica</span>
+                <div class="macros">
+                    <strong>65-70g CHO</strong> <span class="tipo-carbo complejo">carbohidrato complejo</span> <span class="tipo-carbo simple">+ simple</span><br>
+                    (50g CHO de puré + 15g CHO de isotónica = 65g)<br>
+                    <strong>250ml líquido con electrolitos</strong>
+                </div>
+                <div class="ruta-metabolica">
+                    <strong>Rutas metabólicas:</strong> <strong>Almidón</strong> de tubérculo (papa, camote) cocido = absorción media + <strong>maltodextrina</strong> en bebida isotónica<br>
+                    Textura salada para cambiar sabor
+                </div>
+            </li>
+            
+            <li>
+                <span class="hora">Hora 4:</span>
+                <span class="comida">Fruta + gel + isotónica</span>
+                <div class="macros">
+                    <strong>60-65g CHO</strong> <span class="tipo-carbo simple">carbohidratos simples</span><br>
+                    (27g fruta + 25g gel + 9g isotónica = 61g)
+                </div>
+                <div class="ruta-metabolica">
+                    <strong>Rutas metabólicas:</strong> <strong>Fructosa</strong> de banana + <strong>maltodextrina+fructosa</strong> de gel + <strong>glucosa</strong> de isotónica<br>
+                    Triple vía de absorción: GLUT5 + SGLT1 + difusión pasiva
+                </div>
+            </li>
+            
+            <li>
+                <span class="hora">Hora 5 (mitad del evento):</span>
+                <span class="comida">Tortilla dulce + isotónica</span>
+                <div class="macros">
+                    <strong>58-60g CHO</strong> <span class="tipo-carbo complejo">carbohidrato complejo</span> <span class="tipo-carbo simple">+ simple</span><br>
+                    (32g tortilla + 15g miel + 12g gomita/dulce pequeño = 59g)<br>
+                    <strong>250ml líquido con electrolitos</strong>
+                </div>
+                <div class="ruta-metabolica">
+                    <strong>Rutas metabólicas:</strong> <strong>Almidón</strong> de masa (absorción lenta-media) + <strong>fructosa+glucosa</strong> de miel + <strong>sacarosa</strong> pura de gomita<br>
+                    Combina velocidades de absorción
+                </div>
+            </li>
+            
+            <li>
+                <span class="hora">Hora 6:</span>
+                <span class="comida">Bolita de arroz sola (o con gel extra si necesitas)</span>
+                <div class="macros">
+                    <strong>70g CHO</strong> <span class="tipo-carbo complejo">carbohidrato complejo</span> <span class="tipo-carbo simple">+ simple opcional</span><br>
+                    (45g arroz solo = 45g → añadir gel 25g = 70g)<br>
+                    <em>O también: bolita + 150ml isotónica (9g) = 54g si ves bajón, gel</em>
+                </div>
+                <div class="ruta-metabolica">
+                    <strong>Rutas metabólicas:</strong> <strong>Almidón de arroz</strong> (amilosa+amilopectina) → digestión enzimática a glucosa + opcional <strong>maltodextrina+fructosa</strong> de gel<br>
+                    Si te sientes pesado, solo bolita + isotónica (9g) = 54g
+                </div>
+            </li>
+            
+            <li>
+                <span class="hora">Hora 7:</span>
+                <span class="comida">Mini papas + isotónica</span>
+                <div class="macros">
+                    <strong>57-60g CHO</strong> <span class="tipo-carbo complejo">carbohidrato complejo</span> <span class="tipo-carbo simple">+ simple</span><br>
+                    (42.9g papas + 15g isotónica = 57.9g)<br>
+                    <strong>250ml líquido</strong><br>
+                    <em>Añadir un trozo pequeño de fruta jugosa (+8-10g) si necesitas</em>
+                </div>
+                <div class="ruta-metabolica">
+                    <strong>Rutas metabólicas:</strong> <strong>Almidón de papa</strong> (cocida = rápida absorción) + <strong>maltodextrina</strong> bebida<br>
+                    Papa cocida tiene alto índice glucémico = glucosa rápida al torrente
+                </div>
+            </li>
+            
+            <li>
+                <span class="hora">Hora 8:</span>
+                <span class="comida">Puré dulce (papa/camote) + gel</span>
+                <div class="macros">
+                    <strong>75g CHO</strong> <span class="tipo-carbo complejo">carbohidrato complejo</span> <span class="tipo-carbo simple">+ simple</span><br>
+                    (50g puré + 25g gel = 75g)<br>
+                    <em>Si te queda pesado, solo puré + 150ml bebida = 59g</em>
+                </div>
+                <div class="ruta-metabolica">
+                    <strong>Rutas metabólicas:</strong> <strong>Almidón dulce</strong> (camote = más fructosa natural que papa) + <strong>maltodextrina+fructosa</strong> de gel<br>
+                    Doble absorción: amilasa pancreática + transportadores duales
+                </div>
+            </li>
+            
+            <li>
+                <span class="hora">Hora 9:</span>
+                <span class="comida">Fruta + isotónica</span>
+                <div class="macros">
+                    <strong>42g CHO</strong> <span class="tipo-carbo simple">carbohidratos simples</span><br>
+                    (27g banana + 15g isotónica = 42g)<br>
+                    <strong>250ml líquido</strong><br>
+                    <em>Completar con 1 gel = 67g si es necesario</em>
+                </div>
+                <div class="ruta-metabolica">
+                    <strong>Rutas metabólicas:</strong> <strong>Fructosa natural</strong> de banana + <strong>maltodextrina</strong> de bebida<br>
+                    Absorción rápida, fácil de digerir en etapa final
+                </div>
+            </li>
+            
+            <li>
+                <span class="hora">Hora 10 (entrada final):</span>
+                <span class="comida">Tortilla + atún (salado) + miel ligera + isotónica</span>
+                <div class="macros">
+                    <strong>~60g CHO</strong> <span class="tipo-carbo complejo">carbohidrato complejo</span> <span class="tipo-carbo simple">+ simple</span><br>
+                    <strong>20-25g proteína</strong> (atún para sostén muscular final)<br>
+                    <em>(Hacerlo suave para no empachar)</em>
+                </div>
+                <div class="ruta-metabolica">
+                    <strong>Rutas metabólicas:</strong> <strong>Almidón de maíz</strong> + <strong>fructosa+glucosa</strong> de miel + <strong>maltodextrina</strong> bebida<br>
+                    Proteína añadida ayuda a prevenir catabolismo muscular en fase final<br>
+                    Objetivo: mantener energía sin sobrecargar el sistema digestivo
+                </div>
+            </li>
+        </ul>
+        
+        <div class="nota-importante">
+            <strong>NOTAS IMPORTANTES:</strong>
+            <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+                <li><strong>Meta general:</strong> 60-80g CHO por hora durante competencia</li>
+                <li><strong>Rutas metabólicas óptimas:</strong> Combinar siempre que sea posible <strong>maltodextrina:fructosa</strong> en ratio 1:0.8 para maximizar absorción (hasta 90g/hora con entrenamiento intestinal)</li>
+                <li><strong>Hidratación:</strong> 500-750ml líquido por hora según temperatura y sudoración</li>
+                <li><strong>Electrolitos:</strong> 300-600mg sodio por hora en todas las bebidas</li>
+                <li><strong>Textura y sabores:</strong> Alternar salado/dulce, sólido/líquido para prevenir fatiga sensorial</li>
+                <li><strong>Flexibilidad:</strong> Estos son marcos, ajusta según sensaciones gastrointestinales</li>
+                <li><strong>Entrenamiento intestinal:</strong> Practica este protocolo en entrenamientos largos ANTES de la competencia</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p><strong>eat&flow</strong> | Nutrición Deportiva Especializada</p>
+            <p>Plan nutricional diseñado para atletas de resistencia</p>
+        </div>
+    </div>
+</body>
+</html>
